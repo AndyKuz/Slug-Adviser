@@ -1,5 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion';
 import APClassTracker from './APClassSelector/ApClassesComponent';
+import UCSCCourseTracker from './UCSCoursesTaken/UCSCClassComponent';
+import UserPreferences from './UserPreference';
 function AccordionComponent() {
   return (
     <Accordion defaultActiveKey="0">
@@ -14,6 +16,13 @@ function AccordionComponent() {
         <Accordion.Header>Current Student</Accordion.Header>
         <Accordion.Body>
         Pick the Current Classes you have completed
+        <UCSCCourseTracker></UCSCCourseTracker>
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="2">
+        <Accordion.Header>Once You Have Entereed Your classes Select Your Preferences</Accordion.Header>
+        <Accordion.Body>
+        <UserPreferences></UserPreferences>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

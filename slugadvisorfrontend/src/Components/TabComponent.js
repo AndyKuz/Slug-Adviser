@@ -13,7 +13,10 @@ function TabComponent() {
       Choose based on what things you have done
         <AccordionComponent/>
       </Tab>
-      <Tab eventKey="Advisor" title="Home">
+      <Tab eventKey="Advisor" title="Advisor">
+        ChatGpt 
+      </Tab>
+      <Tab eventKey="Schedule" title="GeneratedSchedule">
         ChatGpt 
       </Tab>
       
