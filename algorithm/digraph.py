@@ -68,8 +68,7 @@ class Digraph:
 
         # iterates through all other root nodes first
         for c in self.root_courses:
-            if c in chosen_classes: 
-                continue
+            if c in chosen_classes: continue
             if self.check_class_compatibility(chosen_classes[-1], c, min_credits, max_credits, min_hours, max_hours):
                 chosen_classes.append(c)
                 if len(chosen_classes) == num_classes:
