@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
+import professor
+import course
+import studentpreferences
 
     
 def find_professor_url(professorName, site):
@@ -16,10 +19,12 @@ def find_professor_url(professorName, site):
 
     return None
 
-# professorName = 'Linsey Kuper'
-# site_to_search = 'ratemyprofessors.com'
+
 
 def rmp_exec(professorName):
+
+    # professorName = 'Linsey Kuper'
+    # site_to_search = 'ratemyprofessors.com'
 
     PROFESSOR_URL = find_professor_url(professorName, 'ratemyprofessors.com')
 
@@ -45,15 +50,15 @@ def rmp_exec(professorName):
 
             fullName = f"{firstName} {lastName}"
 
-            print("Professor's Full Name:", fullName)
+            print("TEST - Professor's Full Name:", fullName)
         else: #Error Handling
             print("Name element not found.")
 
         if len(feedbackElements) >= 2:
             difficultyElement = feedbackElements[1].find('div', {'class': 'FeedbackItem__FeedbackDescription-uof32n-2', 'class': 'kkESWs'})
             if difficultyElement:
-                difficultyLevel = difficultyElement.text.strip()
-                print("Level of Difficulty:", difficultyLevel)
+                professorDifficulty = difficultyElement.text.strip()
+                print("TEST - Level of Difficulty:", professorDifficulty)
             else: #Error Handling
                 print("Difficulty element not found.")
         else: #Error Handling
@@ -61,9 +66,23 @@ def rmp_exec(professorName):
 
         if ratingElement:
             professorRating = ratingElement.find('div', {'class': 'RatingValue__Numerator-qw8sqy-2'}).text.strip()
-            print("Professor Rating:", professorRating)
+            print("TEST - Professor Rating:", professorRating)
         else: #Error Handling
             print("Rating element not found.")
 
+        ratingDifficulty = [professorRating, professorDifficulty]
+        return ratingDifficulty
     else: #Error Handling
         print("Failed to retrieve the webpage. Status code:", response.status_code)
+
+
+def main():
+    professorKuper = professor()
+    professorKuper.professorName = 'Lindsey Kuper'
+    professorKuper.professorRating = rmp_exec.get(0)
+    professorKuper.professorDifficulty = rmp_exec.get(1)
+
+    print("TESTING MAIN KUPER RATING: ", professorKuper.professorRating)
+    print("TESTING MAIN KUPER DIFFICULTY: ", professorKuper.professorDifficulty)
+    print("TESTING THIS IS KUPER: ", professorKuper.professorName)
+

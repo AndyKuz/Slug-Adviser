@@ -1,7 +1,7 @@
 class Professor:
-    def __init__(self, professorName, difficultyLevel, professorRating):
+    def __init__(self, professorName, professorDifficulty, professorRating):
         self.professorName = professorName
-        self.difficultyLevel = difficultyLevel
+        self.professorDifficulty = professorDifficulty
         self.professorRating = professorRating
-        
+
 
