@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import CheckExample from './CheckBox'; // Assuming the CheckExample component is in a separate file
 import allAPClasses from './APCLassList';
 import SearchBar from './Searchbar';
+import { Button } from 'react-bootstrap';
 
 const APClassTracker = () => {
   const [classesTaken, setClassesTaken] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [selectedScore, setSelectedScore] = useState('');
+
+  const [scores3, setScores3] = useState([]);
+  const [scores4, setScores4] = useState([]);
+  const [scores5, setScores5] = useState([]);
 
   const handleSearchChange = (selectedItems) => {
     setSelectedClasses(selectedItems);
@@ -33,29 +37,36 @@ const APClassTracker = () => {
     // Update score lists based on the selected score
     switch (selectedScore) {
       case '3':
-        const updatedScores3 = [...scores3, ...newClasses];
-        setScores3(updatedScores3);
-        console.log('Scores 3:', updatedScores3);
+        setScores3([...scores3, ...newClasses]);
         break;
       case '4':
-        const updatedScores4 = [...scores4, ...newClasses];
-        setScores4(updatedScores4);
-        console.log('Scores 4:', updatedScores4);
+        setScores4([...scores4, ...newClasses]);
         break;
       case '5':
-        const updatedScores5 = [...scores5, ...newClasses];
-        setScores5(updatedScores5);
-        console.log('Scores 5:', updatedScores5);
+        setScores5([...scores5, ...newClasses]);
         break;
       default:
         break;
     }
   };
 
-  // Assuming you have these state variables
-  const [scores3, setScores3] = useState([]);
-  const [scores4, setScores4] = useState([]);
-  const [scores5, setScores5] = useState([]);
+  const deletescor3 = (index) => {
+    const updatedClasses = [...scores3];
+    updatedClasses.splice(index, 1);
+    setScores3(updatedClasses);
+  };
+  const deletescor4 = (index) => {
+    const updatedClasses = [...scores4];
+    updatedClasses.splice(index, 1);
+    setScores4(updatedClasses);
+  };
+  const deletescor5 = (index) => {
+    const updatedClasses = [...scores5];
+    updatedClasses.splice(index, 1);
+    setScores5(updatedClasses);
+  };
+  
+
   return (
     <div>
       <h2>AP Class Tracker</h2>
@@ -70,13 +81,16 @@ const APClassTracker = () => {
         </select>
       </div>
       <div>
-        <button onClick={addClasses}>Add Classes</button>
+        <Button onClick={addClasses}>Add Classes</Button>
       </div>
       <div>
         <h3>Classes with Score 3:</h3>
         <ul>
           {scores3.map((course, index) => (
-            <li key={index}>{course.className}</li>
+            <li key={index}>
+              {course.className}
+              <Button onClick={() => deletescor3(index)}>Delete</Button>
+            </li>
           ))}
         </ul>
       </div>
@@ -84,7 +98,10 @@ const APClassTracker = () => {
         <h3>Classes with Score 4:</h3>
         <ul>
           {scores4.map((course, index) => (
-            <li key={index}>{course.className}</li>
+            <li key={index}>
+              {course.className}
+              <Button onClick={() => deletescor4(index)}>Delete</Button>
+            </li>
           ))}
         </ul>
       </div>
@@ -92,7 +109,10 @@ const APClassTracker = () => {
         <h3>Classes with Score 5:</h3>
         <ul>
           {scores5.map((course, index) => (
-            <li key={index}>{course.className}</li>
+            <li key={index}>
+              {course.className}
+              <Button onClick={() => deletescor5(index)}>Delete</Button>
+            </li>
           ))}
         </ul>
       </div>
