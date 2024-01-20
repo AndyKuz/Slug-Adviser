@@ -9,3 +9,9 @@ class Course:
         self.outgoing_prereqs = outgoing_prereqs if outgoing_prereqs is not None else []
         self.quarters = quarters if quarters is not None else []
         self.profs = profs if profs is not None else []
+
+class Quarter:
+    def __init__(self, college_year, quarter_type, course_list):
+        self.college_year = college_year
+        self.quarter_type = quarter_type
+        self.course_list = course_list
