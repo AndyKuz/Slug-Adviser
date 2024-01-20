@@ -9,3 +9,4 @@ class Course:
         self.outgoing_prereqs = outgoing_prereqs if outgoing_prereqs is not None else []
         self.quarters = quarters if quarters is not None else []
         self.profs = profs if profs is not None else []
+        

@@ -3,4 +3,5 @@ class Professor:
         self.professorName = professorName
         self.difficultyLevel = difficultyLevel
         self.professorRating = professorRating
+        
 
