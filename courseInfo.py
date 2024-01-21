@@ -43,5 +43,3 @@ CS = [cse_12, cse_16, cse_20, cse_30, cse_13s, math_19a, math_19b, am_10, am_30,
 Digital_Hardware = [cse_125, cse_122, cse_220]
 
 CE.extend(Digital_Hardware)
-
-schedule_maker.create_schedule(CE, [cse_20, cse_30, math_19a, math_19b], 1)
