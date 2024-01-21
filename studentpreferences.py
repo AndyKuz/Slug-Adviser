@@ -1,5 +1,5 @@
 class StudentPreferences:
-    def __init__(self, minHoursWork, maxHoursWork, minCreditsQuarter, maxCreditsQuarter, major, APScore3, APScore4, APScore5):
+    def __init__(self, minHoursWork, maxHoursWork, minCreditsQuarter, maxCreditsQuarter, major, coursesTaken, APScore3, APScore4, APScore5):
         self.minHoursWork = minHoursWork
         self.maxHoursWork = maxHoursWork
         self.minCreditsQuarter = minCreditsQuarter
@@ -7,6 +7,7 @@ class StudentPreferences:
         self.APScore3 = APScore3
         self.APScore4 = APScore4
         self.APScore5 = APScore5
+        self.coursesTaken = coursesTaken
         # self.summerClasses = summerClasses
         self.major = major
 
