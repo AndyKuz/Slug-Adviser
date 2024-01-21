@@ -30,10 +30,26 @@ CORS(app)
 
 @app.route('/saveData', methods=['POST'])
 def save_data():
-    try:
+    # try:
         user_data = request.get_json()
+        print(user_data)
         user_pref = parse_user_pref(user_data)
+        print(user_pref)
         
+        print("computing...")
+        
+        major_courses = []
+        placeholder_courses = []
+        if user_pref.major == "Computer Science":
+            major_courses = courseInfo.get_cs_courses()
+            placeholder_courses = courseInfo.get_cs_placeholders()
+        elif user_pref.major == "Computer Engineering":
+            major_courses = courseInfo.get_ce_courses()
+            placeholder_courses = courseInfo.get_ce_placeholder()
+        else:
+            print("Error major not recognized")
+            
+        print("?")
         college_year = 0
         if user_pref.currentYear == "Freshman":
             college_year = 0
@@ -57,24 +73,16 @@ def save_data():
         print("major courses: ", major_courses)
         print("courses_taken: ", user_pref.get_courses_taken())
 
-        major_courses = []
-        placeholder_courses = []
-        if user_pref.major == "Computer Science":
-            major_courses = courseInfo.get_cs_courses()
-            placeholder_courses = courseInfo.get_cs_courses()
-        elif user_pref.major == "Computer Engineering":
-            major_courses = courseInfo.get_ce_courses()
-            placeholder_courses = courseInfo.get_ce_placeholder()
-        else:
-            return jsonify({'error': 'Major not recognized'}), 400
-            
-        quarters = schedule_maker.create_schedule(major_courses, user_pref.get_courses_taken(), college_year, placeholder_courses)
-        plan_data = py2jsonconvert.convert(quarters)
-
-        # Send the plan_data directly to the frontend
+        
+        # Process and handle the data received from the frontend
+        print('Received data from frontend:', user_data)
+        print("\n")
+        print("Print Plan Out")
+        print(plan_data)
         return jsonify(plan_data), 200
-    except Exception as e:
-        return jsonify({'error': f'Failed to process data {str(e)}'}), 500
+    # except Exception as e:
+    #     print('Error processing data:', str(e))
+    #     return jsonify({'error': f'Failed to process data {str(e)}'}), 500
 
 def parse_user_pref(data):
     # Parse the JSON data

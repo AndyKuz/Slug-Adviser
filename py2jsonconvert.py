@@ -1,7 +1,29 @@
 import json
-from course import Quarter
+from course import Quarter, Course
 from typing  import List
 
+# def convert(qlist: List[Quarter]):
+#     plan_data = []
+
+#     # Group quarters by year
+#     quarters_by_year = {}
+#     for quarter in qlist:
+#         if quarter.college_year not in quarters_by_year:
+#             quarters_by_year[quarter.college_year] = []
+#         quarters_by_year[quarter.college_year].append(quarter)
+
+#     # Create JSON format
+#     for year, quarters in quarters_by_year.items():
+#         year_data = {"year": year, "quarters": []}
+#         for quarter in quarters:
+#             quarter_data = {
+#                 "quarter": quarter.quarter_type,
+#                 "courses": quarter.course_list
+#             }
+#             year_data["quarters"].append(quarter_data)
+#         plan_data.append(year_data)
+
+#     return plan_data
 def convert(qlist: List[Quarter]):
     plan_data = []
 
@@ -18,7 +40,7 @@ def convert(qlist: List[Quarter]):
         for quarter in quarters:
             quarter_data = {
                 "quarter": quarter.quarter_type,
-                "courses": quarter.course_list
+                "courses": [course for course in quarter.course_list]
             }
             year_data["quarters"].append(quarter_data)
         plan_data.append(year_data)
