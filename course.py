@@ -31,6 +31,8 @@ class Course:
             'dptmnt': self.dptmnt,
             'dptmnt_num': self.dptmnt_num,
             'course_title': self.course_title,
+            'best_prof': self.best_prof,
+            'best_prof_rating': self.best_prof_rating,
             'num_credits': self.num_credits,
             'incoming_prereqs': incoming_prereqs_dict,
             'quarters': self.quarters,

@@ -1,4 +1,5 @@
 from course import Course
+from ratemyprofessorwebscrape import rmp_exec
 
 math_3 = Course(dptmnt='MATH', dptmnt_num='3', course_title='Precalculus', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[]) #in development
 math_19a = Course(dptmnt='MATH', dptmnt_num='19A', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[])
@@ -111,24 +112,37 @@ course_dict = {
     'stat_131orcse_107': stat_131orcse_107,
 }
 
+def rmp(l):
+      for c in l:
+          best_prof = ""
+          min_rating = 10
+          for p in c.profs:
+              curr_rating = rmp_exec(p)[0]
+              if curr_rating < min_rating:
+                  min_rating = curr_rating
+                  best_prof = p
+
+              
 
 def get_ce_placeholder():
     return ce_placeholders
 
 def get_cs_placeholders():
-    print("cs placeholders: ", cs_placeholders)
     return cs_placeholders
 
 def get_ee_placeholder():
     return ee_placeholders
 
 def get_ce_courses():
+    rmp(ce)
     return ce
 
 def get_cs_courses():
+    rmp(cs)
     return cs
 
 def get_ee_courses():
+    rmp(ee)
     return ee
 
 def get_courseInfo():
