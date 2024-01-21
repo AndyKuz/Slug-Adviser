@@ -27,6 +27,7 @@ from courseInfo import get_courseInfo
 
 app = Flask(__name__)
 CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 FRONT_END_DATA = None #for now
 json_file_path = "./output.json"
 
