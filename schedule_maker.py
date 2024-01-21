@@ -126,7 +126,7 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
                 course2json.append(" ") # to json
                 print("     x") # to console
         elif len(chosen_classes) == 1:
-            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num)) # to json
+            course2json.append(chosen_classes[0].to_dict()) # to json
             print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
             if curr_num_courses == 2:
                 if len(placeholder_classes) >= 1:
@@ -138,16 +138,16 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
                         course2json.append(placeholder_classes[0])  # to json
                         print("     ", placeholder_classes.pop(0))  # to console
         elif len(chosen_classes) == 2 and curr_num_courses == 3:
-            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num))   # to json
+            course2json.append(chosen_classes[0].to_dict())   # to json
             print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
-            course2json.append((chosen_classes[1].dptmnt + " " + chosen_classes[1].dptmnt_num))   # to json
+            course2json.append(chosen_classes[1].to_dict())   # to json
             print("     ", chosen_classes[1].dptmnt, chosen_classes[1].dptmnt_num)  # to console
             if len(placeholder_classes) >= 1:
                 course2json.append(placeholder_classes[0])  # to json
                 print("     ", placeholder_classes.pop(0))  # to console
         elif len(chosen_classes) > 1:
             for c in chosen_classes:
-                course2json.append((c.dptmnt + " " + c.dptmnt_num)) # to json  
+                course2json.append(c.to_dict()) # to json  
                 print("     ", c.dptmnt, c.dptmnt_num)  # to console
         else:
             course2json.append(" ") # to json

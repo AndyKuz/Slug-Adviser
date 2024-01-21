@@ -40,7 +40,8 @@ def convert(qlist: List[Quarter]):
         for quarter in quarters:
             quarter_data = {
                 "quarter": quarter.quarter_type,
-                "courses": [course for course in quarter.course_list]
+                "major_courses": [course for course in quarter.course_list if isinstance(course, Course)],
+                "placeholder_courses": [course for course in quarter.course_list]
             }
             year_data["quarters"].append(quarter_data)
         plan_data.append(year_data)
