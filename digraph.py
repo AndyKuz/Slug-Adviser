@@ -72,9 +72,11 @@ class Digraph:
         while True:
             if quarter in self.root_courses[curr_course].quarters:
                 chosen_courses.append(self.root_courses[curr_course])
+                print("appended course!")
                 break
             else:
                 curr_course = random.randrange(0, len(self.root_courses))
+                print("not appending!")
 
     
         # iterates once or twice depending on num_classes specified

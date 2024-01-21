@@ -61,6 +61,8 @@ def save_data():
             college_year = 3
         
         print("??")
+        print("major courses: ", major_courses)
+        print("user")
         quarters = schedule_maker.create_schedule(major_courses, user_pref.get_courses_taken(), college_year, placeholder_courses)
         print(quarters)
         plan_data = py2jsonconvert.convert(quarters)

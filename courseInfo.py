@@ -1,7 +1,7 @@
 from course import Course
 
 math_3 = Course(dptmnt='MATH', dptmnt_num='3', course_title='Precalculus', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[]) #in development
-math_19a = Course(dptmnt='MATH', dptmnt_num='19A', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[math_3], quarters=[0, 1, 2], profs=[])
+math_19a = Course(dptmnt='MATH', dptmnt_num='19A', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[])
 math_19b = Course(dptmnt='MATH', dptmnt_num='19B', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[math_19a], quarters=[0, 1, 2], profs=[])
 math_23a = Course(dptmnt='MATH', dptmnt_num='23A', course_title='Vector Calculus', num_credits=5, incoming_prereqs=[math_19b], quarters=[0, 1, 2], profs=[])
 math_23b = Course(dptmnt='MATH', dptmnt_num='23B', course_title='Vector Calculus', num_credits=5, incoming_prereqs=[math_23a], quarters=[0, 1, 2], profs=[])

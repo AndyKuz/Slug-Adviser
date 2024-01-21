@@ -95,19 +95,22 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
         chosen_classes = -1
 
         # only chooses classes if the iterated year/quarter is past the actual current year/quarter
-        if current_year == 1:
+        print("current year: ", current_year)
+        if current_year == 0:
             if i > datetime_quarter:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
-        elif current_year == 2:
+        elif current_year == 1:
             if i > datetime_quarter + 3:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
-        elif current_year == 3:
+        elif current_year == 2:
             if i > datetime_quarter + 6:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
-        elif current_year == 4:
+        elif current_year == 3:
             if i > datetime_quarter + 9:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
         
+        print("chosen classes: ", chosen_classes)
+
         course2json = []
         if all_courses_empty:    # for placeholder classes after #'d classes finish
             for i in range(0, curr_num_courses):
