@@ -138,15 +138,12 @@ def get_ee_placeholder():
     return ee_placeholders
 
 def get_ce_courses():
-    rmp(ce)
     return ce
 
 def get_cs_courses():
-    rmp(cs)
     return cs
 
 def get_ee_courses():
-    rmp(ee)
     return ee
 
 def get_courseInfo():

@@ -74,9 +74,6 @@ function TabComponent() {
             </Button>
           </div>
         </Tab>
-        <Tab eventKey="Advisor" title="Advisor" style={{ color: 'black' }}>
-          ChatGpt
-        </Tab>
         <Tab eventKey="Schedule" title="GeneratedSchedule" style={{ color: 'black' }}>
           <Schedule planData={planData} />
         </Tab>

@@ -134,6 +134,6 @@ def parse_user_pref(data):
 #     def get_max_credits(self):
 #         return self._max_credits
 def main():
-    app.run(debug=True, ssl_context='adhoc')
+    app.run(debug=True)
 
 main()
