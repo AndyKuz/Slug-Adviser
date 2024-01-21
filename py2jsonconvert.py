@@ -23,8 +23,9 @@ def convert(qlist: List[Quarter]):
             year_data["quarters"].append(quarter_data)
         plan_data.append(year_data)
 
-    with open('output.json', 'w') as json_file:
-        json.dump({"planData": plan_data}, json_file, indent=4, sort_keys=False)
+    return plan_data
+    # with open('output.json', 'w') as json_file:
+    #     json.dump({"planData": plan_data}, json_file, indent=4, sort_keys=False)
 
 '''   
 qtest1 = Quarter("First year", "Fall", [])

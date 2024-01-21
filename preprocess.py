@@ -11,44 +11,83 @@ import py2jsonconvert
 
 app = Flask(__name__)
 CORS(app)
-json_file_path = "./output.json"
 
-with open(json_file_path, 'r') as json_file:
-    data = json.load(json_file)
+# json_file_path = "./output.json"
+
+# with open(json_file_path, 'r') as json_file:
+#     data = json.load(json_file)
     
-def get_plan_data():
-    return(data.get('planData'))
+# def get_plan_data():
+#     return(data.get('planData'))
 
-@app.route('/api/plan-data', methods=['GET'])
-def plan_data():
-    try:
-        data = get_plan_data()
-        return jsonify(data)
-    except Exception as e:
-        return jsonify({'error': 'Failed to fetch plan data'}), 500
+# @app.route('/api/plan-data', methods=['GET'])
+# def plan_data():
+#     try:
+#         data = get_plan_data()
+#         return jsonify(data)
+#     except Exception as e:
+#         return jsonify({'error': 'Failed to fetch plan data'}), 500
 
 @app.route('/saveData', methods=['POST'])
 def save_data():
-    try:
-        global FRONT_END_DATA 
-        FRONT_END_DATA = request.get_json()
+    # try:
+        user_data = request.get_json()
+        print(user_data)
+        user_pref = parse_user_pref(user_data)
+        print(user_pref)
+        
+        print("computing...")
+        
+        major_courses = []
+        placeholder_courses = []
+        if user_pref.major == "Computer Science":
+            major_courses = courseInfo.get_cs_courses()
+            placeholder_courses = courseInfo.get_cs_courses()
+        elif user_pref.major == "Computer Engineering":
+            major_courses = courseInfo.get_ce_courses()
+            placeholder_courses = courseInfo.get_ce_placeholder()
+        else:
+            print("Error major not recognized")
+            
+        print("?")
+        college_year = 0
+        if user_pref.currentYear == "Freshman":
+            college_year = 0
+        elif user_pref.currentYear == "Sophomore":
+            college_year = 1
+        elif user_pref.currentYear == "Junior":
+            college_year = 2
+        elif user_pref.currentYear == "Senior":
+            college_year = 3
+        
+        print("??")
+        quarters = schedule_maker.create_schedule(major_courses, user_pref.get_courses_taken(), college_year, placeholder_courses)
+        print(quarters)
+        plan_data = py2jsonconvert.convert(quarters)
+        
+        print("finished preprocess:")
+        print("college year: ", college_year)
+        print("min hours: ", user_pref.get_min_hours_work(), " max hours: ", user_pref.get_max_hours_work)
+        print("major courses: ", major_courses)
+        print("courses_taken: ", user_pref.get_courses_taken())
+
         
         # Process and handle the data received from the frontend
-        print('Received data from frontend:', FRONT_END_DATA)
+        print('Received data from frontend:', user_data)
         print("\n")
-        output = get_plan_data()
-        return jsonify(output), 200
-    except Exception as e:
-        print('Error processing data:', str(e))
-        return jsonify({'error': 'Failed to process data'}), 500
+        print(plan_data)
+        return jsonify(plan_data), 200
+    # except Exception as e:
+    #     print('Error processing data:', str(e))
+    #     return jsonify({'error': f'Failed to process data {str(e)}'}), 500
 
-def parse_json(json_data):
+def parse_user_pref(data):
     # Parse the JSON data
-    data = json.loads(json_data)
+    # data = json.loads(json_data)
 
     # Extracting information and assigning to variables
     major = data.get("Major", "")
-    courses_taken = data.get("CoursesTaken", [])
+    courses_taken = data.get("CoursesTaken", []) #fix course issue
     ap_scores_3 = data.get("APScores3", [])
     ap_scores_4 = data.get("APScores4", [])
     ap_scores_5 = data.get("APScores5", [])
@@ -91,37 +130,5 @@ def parse_json(json_data):
 #         return self._max_credits
 def main():
     app.run(debug=True)
-    user_pref = parse_json(FRONT_END_DATA)
-    
-    major_courses = []
-    placeholder_courses = []
-    if user_pref.major == "Computer Science":
-        major_courses = courseInfo.get_cs_courses()
-        placeholder_courses = courseInfo.get_cs_courses()
-    elif user_pref.major == "Computer Engineering":
-        major_courses = courseInfo.get_ce_courses()
-        placeholder_courses = courseInfo.get_ce_placeholder()
-    else:
-        print("Error major not recognized")
-        
-    college_year = 0
-    if user_pref.currentYear == "Freshman":
-        college_year = 0
-    elif user_pref.currentYear == "Sophomore":
-        college_year = 1
-    elif user_pref.currentYear == "Junior":
-        college_year = 2
-    elif user_pref.currentYear == "Senior":
-        college_year = 3
-    
-    quarters = schedule_maker.create_schedule(major_courses, user_pref.get_courses_taken(), college_year, placeholder_courses)
-    
-    py2jsonconvert.convert(quarters)
-    
-    print("finished preprocess:")
-    print("college year: ", college_year)
-    print("min hours: ", user_pref.get_min_hours_work(), " max hours: ", user_pref.get_max_hours_work)
-    print("major courses: ", major_courses)
-    print("courses_taken: ", user_pref.get_courses_taken())
-main()
 
+main()

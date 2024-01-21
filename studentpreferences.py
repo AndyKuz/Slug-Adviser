@@ -1,13 +1,9 @@
 import courseInfo
 
-def ApIbConverter(userPref):
+def ApIbConverter(APScore3, APScore4, APScore5):
     # print("ENTERED AP IB CONVERTER METHOD")
     
     # userPreferences = parse_json(FRONT_END_DATA)
-    
-    APScore3 = userPref.APScore3
-    APScore4 = userPref.APScore4
-    APScore5 = userPref.APScore5
 
 
     apCourses = APScore3 + APScore4 + APScore5
@@ -80,6 +76,7 @@ def ApIbConverter(userPref):
 
 class StudentPreferences:
     def __init__(self, minHoursWork, maxHoursWork, minCreditsQuarter, maxCreditsQuarter, major, coursesTaken, currentYear, APScore3, APScore4, APScore5):
+        courseInfoDict = courseInfo.get_courseInfo()
         self.minHoursWork = minHoursWork
         self.maxHoursWork = maxHoursWork
         self.minCreditsQuarter = minCreditsQuarter
@@ -87,7 +84,7 @@ class StudentPreferences:
         self.APScore3 = APScore3
         self.APScore4 = APScore4
         self.APScore5 = APScore5
-        self.coursesTaken = list(set(ApIbConverter(self) + coursesTaken))
+        self.coursesTaken = list(set(ApIbConverter(APScore3, APScore4, APScore5) + [courseInfoDict.get(c['className'].split(':')[0].lower().replace(" ", "_")) for c in coursesTaken]))
         self.currentYear = currentYear
         # self.summerClasses = summerClasses
         self.major = major
