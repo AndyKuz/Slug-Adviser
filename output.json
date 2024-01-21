@@ -1,0 +1,108 @@
+{
+    "planData": [
+        {
+            "year": "First year",
+            "quarters": [
+                {
+                    "quarter": "Fall",
+                    "courses": [
+                        " ",
+                        " "
+                    ]
+                },
+                {
+                    "quarter": "Winter",
+                    "courses": [
+                        " ",
+                        " "
+                    ]
+                },
+                {
+                    "quarter": "Spring",
+                    "courses": [
+                        "CSE 12",
+                        "MATH 19B"
+                    ]
+                }
+            ]
+        },
+        {
+            "year": "Second year",
+            "quarters": [
+                {
+                    "quarter": "Fall",
+                    "courses": [
+                        "CSE 16",
+                        "CSE 13S"
+                    ]
+                },
+                {
+                    "quarter": "Winter",
+                    "courses": [
+                        "STAT or CSE 131 or 107",
+                        "CSE 101"
+                    ]
+                },
+                {
+                    "quarter": "Spring",
+                    "courses": [
+                        "CSE 130",
+                        "ECE 30"
+                    ]
+                }
+            ]
+        },
+        {
+            "year": "Third year",
+            "quarters": [
+                {
+                    "quarter": "Fall",
+                    "courses": [
+                        "CSE 102",
+                        "AM 10"
+                    ]
+                },
+                {
+                    "quarter": "Winter",
+                    "courses": [
+                        "AM 30",
+                        "CSE 120"
+                    ]
+                },
+                {
+                    "quarter": "Spring",
+                    "courses": [
+                        "CSE 103",
+                        "CSE 112 or 114A"
+                    ]
+                }
+            ]
+        },
+        {
+            "year": "Fourth year",
+            "quarters": [
+                {
+                    "quarter": "Fall",
+                    "courses": [
+                        "Elective 1",
+                        "Elective 2"
+                    ]
+                },
+                {
+                    "quarter": "Winter",
+                    "courses": [
+                        "Elective 3",
+                        "Elective 4"
+                    ]
+                },
+                {
+                    "quarter": "Spring",
+                    "courses": [
+                        "Capstone Course",
+                        "Disciplinary Communications"
+                    ]
+                }
+            ]
+        }
+    ]
+}

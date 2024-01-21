@@ -1,0 +1,53 @@
+{
+    "planData": [
+        {
+            "year": "First year",
+            "quarters": [
+                {
+                    "quarter": "Fall",
+                    "courses": []
+                },
+                {
+                    "quarter": "Winter",
+                    "courses": [
+                        "cse 12",
+                        "cse 16"
+                    ]
+                },
+                {
+                    "quarter": "Spring",
+                    "courses": [
+                        "cse 120",
+                        "cse 16"
+                    ]
+                }
+            ]
+        },
+        {
+            "year": "Second year",
+            "quarters": [
+                {
+                    "quarter": "Fall",
+                    "courses": [
+                        "cse 12",
+                        "cse 16"
+                    ]
+                },
+                {
+                    "quarter": "Winter",
+                    "courses": [
+                        "cse 12",
+                        "cse 16"
+                    ]
+                },
+                {
+                    "quarter": "Spring",
+                    "courses": [
+                        "cse 12",
+                        "cse 16"
+                    ]
+                }
+            ]
+        }
+    ]
+}

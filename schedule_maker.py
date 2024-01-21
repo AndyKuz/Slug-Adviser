@@ -150,5 +150,5 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
             course2json.append(" ") # to json
             print("     x\n     x") # to console
         print()
-        quarters_list.append(Quarter(current_quarter_string, current_quarter_string, course2json))
+        quarters_list.append(Quarter(current_year_string, current_quarter_string, course2json))
     return quarters_list
