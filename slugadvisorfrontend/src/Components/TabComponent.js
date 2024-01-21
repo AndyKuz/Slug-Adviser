@@ -6,9 +6,12 @@ import { useSharedState } from '../SharedContext';
 import Schedule from './GeneratedSchedule/Schedule';
 import jsondata from './GeneratedSchedule/SampleClasses.json';
 import MajorAndYearDropdowns from './MajorSelection';
+import { useState, useEffect } from 'react';
 
 function TabComponent() {
   const { sharedState, updateSharedState } = useSharedState();
+  const [planData, setPlanData] = useState(null);
+  const [error, setError] = useState(null);
   const handleSaveData = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/saveData', {
@@ -21,6 +24,8 @@ function TabComponent() {
 
       if (response.ok) {
         console.log('Data successfully sent to the backend.');
+        const responseJson = await response.json()
+        setPlanData(responseJson);
       } else {
         console.error('Failed to send data to the backend.');
       }
@@ -28,6 +33,24 @@ function TabComponent() {
       console.error('Error while sending data:', error);
     }
   };
+
+  // useEffect(() => {
+  // //   const fetchData = async () => {
+  // //     try {
+  // //       const response = await fetch('http://127.0.0.1:5000/plan-data'); // Adjust the endpoint
+  // //       if (response.ok) {
+  // //         const data = await response.json();
+  // //         setPlanData(data);
+  // //       } else {
+  // //         setError('Failed to fetch data');
+  // //       }
+  // //     } catch (error) {
+  // //       setError('Error while fetching data');
+  // //     }
+  // //   };
+
+  // //   fetchData();
+  // // }, []);
 
   const borderStyle = {
     padding: '30px',
@@ -55,7 +78,7 @@ function TabComponent() {
           ChatGpt
         </Tab>
         <Tab eventKey="Schedule" title="GeneratedSchedule" style={{ color: 'black' }}>
-          <Schedule planData={jsondata.planData} />
+          <Schedule planData={planData} />
         </Tab>
       </Tabs>
       <div style={{ marginTop: '20px' }}></div>

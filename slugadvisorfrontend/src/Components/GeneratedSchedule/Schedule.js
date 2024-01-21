@@ -2,6 +2,13 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 
 const PlanTable = ({ planData }) => {
+  if (!planData) {
+    return <p>Loading...</p>; // Display a loading state while data is being fetched
+  }
+
+  if (planData.error) {
+    return <p>Error loading data. Please try again.</p>; // Display an error message if there's an issue with the data
+  }
   return (
     <Table striped>
       <thead>
