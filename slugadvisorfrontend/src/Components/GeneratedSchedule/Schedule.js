@@ -1,10 +1,15 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import CourseToast from './CourseToast';
+import Spinner from 'react-bootstrap/Spinner';
 
 const PlanTable = ({ planData }) => {
   if (!planData) {
-    return <p>Loading...</p>; // Display a loading state while data is being fetched
+    return (
+    <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+    )// Display a loading state while data is being fetched
   }
 
   if (planData.error) {
@@ -31,9 +36,7 @@ const PlanTable = ({ planData }) => {
                 {quarterData.major_courses.map((course, coursesIndex) => (
                   <CourseToast
                     key={`major-course-${yearIndex}-${quarterIndex}-${coursesIndex}`}
-                    name={course.dptmnt}
-                    dptmntNum={course.dptmnt_num}
-                    title={`${course.course_title}\n Credits: ${course.num_credits}`}
+                    name={course}
                   />
                 ))}
                 {/* Handle placeholder courses */}

@@ -46,6 +46,9 @@ def save_data():
         elif user_pref.major == "Computer Engineering":
             major_courses = courseInfo.get_ce_courses()
             placeholder_courses = courseInfo.get_ce_placeholder()
+        elif user_pref.major == "Electrical Engineering":
+            major_courses = courseInfo.get_ee_courses()
+            placeholder_courses = courseInfo.get_ee_placeholder()
         else:
             print("Error major not recognized")
 

@@ -11,7 +11,7 @@ const MajorAndYearDropdowns = () => {
   const [selectedYear, setSelectedYear] = useState('Select Year');
   const { sharedState, updateSharedState } = useSharedState();
 
-  const majors = ['Computer Science', 'Computer Engineering'];
+  const majors = ['Computer Science', 'Computer Engineering', 'Electrical Engineering'];
   const years = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
 
   const handleMajorSelect = (major) => {

@@ -6,6 +6,7 @@ const allUCSCClasses = [
   'MATH 23B: Vector Calculus', 
   'AM 10: Mathematical Methods for Engineers I',
   'AM 20: Mathematical Methods for Engineers II',
+  'AM 30: Mathematical Methods for Engineers III',
   'STAT 131: Introduction to Probability Theory',
   'CSE 20: Beginning Programming in Python',
   'CSE 30: Programming Abstractions: Python',
