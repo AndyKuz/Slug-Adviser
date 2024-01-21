@@ -19,10 +19,12 @@ cse_101 = course.Course(dptmnt='CSE', dptmnt_num='101', course_title='Introducti
 cse_102 = course.Course(dptmnt='CSE', dptmnt_num='102', course_title='Introduction to Analysis of Algorithms', num_credits=5, incoming_prereqs=[cse_101], quarters=[0, 1, 2], profs=[])
 cse_103 = course.Course(dptmnt='CSE', dptmnt_num='103', course_title='Computational Models', num_credits=5, incoming_prereqs=[cse_101], quarters=[0, 1, 2], profs=[])
 cse_107 = course.Course(dptmnt='CSE', dptmnt_num='107', course_title='Probability and Statistics for Engineers', num_credits=5, incoming_prereqs=[cse_16, am_30], quarters=[0, 1, 2], profs=[])
+cse_113 = course.Course(dptmnt='CSE', dptmnt_num='113', course_title='Parallel and Concurrent Programming', num_credits=5, incoming_prereqs=[cse_12, cse_101], quarters=[0, 1, 2], profs=[])
 cse_120 = course.Course(dptmnt='CSE', dptmnt_num='120', course_title='Computer Architecture', num_credits=5, incoming_prereqs=[cse_12, cse_13s], quarters=[0, 1, 2], profs=[])
 cse_125 = course.Course(dptmnt='CSE', dptmnt_num='125', course_title='Logic Design with Verilog', num_credits=7, incoming_prereqs=[cse_100, cse_120], quarters=[2], profs=[])
 cse_130 = course.Course(dptmnt='CSE', dptmnt_num='130', course_title='Principles of Computer Systems Design', num_credits=5, incoming_prereqs=[cse_12, cse_101], quarters=[0, 1, 2], profs=[])
 cse_150 = course.Course(dptmnt='CSE', dptmnt_num='150', course_title='Introduction to Computer Networks', num_credits=7, incoming_prereqs=[cse_12, cse_16, cse_30], quarters=[0, 1, 2], profs=[])
+cse_156 = course.Course(dptmnt='CSE', dptmnt_num='156/L', course_title='Network Programming', num_credits=7, incoming_prereqs=[cse_150, cse_101], quarters=[1], profs=[])
 cse_185e = course.Course(dptmnt='CSE', dptmnt_num='185E', course_title='Technical Writing for Computer Science and Engineering', num_credits=5, incoming_prereqs=[cse_12], quarters=[0, 1, 2], profs=[])
 ece_30 = course.Course(dptmnt='ECE', dptmnt_num='30', course_title='Engineering Principles of Electronics', num_credits=5, incoming_prereqs=[math_19b], quarters=[1, 2], profs=[])
 ece_101 = course.Course(dptmnt='ECE', dptmnt_num='101/L', course_title='Introduction to Electronic Circuits', num_credits=7, incoming_prereqs=[phys_5c, am_20], quarters=[0, 1], profs=[])
@@ -40,8 +42,12 @@ ce = [math_19a, math_19b, am_10, am_20, am_30, cse_20, cse_30, cse_12, cse_13s, 
 cs = [cse_12, cse_16, cse_20, cse_30, cse_13s, math_19a, math_19b, am_10, am_30, ece_30, cse_101, 
       cse_102, cse_103, cse_120, cse_130, cse_112orcse_114a, stat_131orcse_107]
 
+ce_computer_systems = [cse_125, cse_130, cse_111]
 ce_digital_hardware = [cse_125, cse_122, cse_220]
+ce_networks = [cse_150, cse_156, cse_130]
+ce_system_programming = [cse_130, cse_111, cse_150, cse_113]
 
+ce_placeholders = ["Elective 1"]
 cs_placeholders = ["Elective 1", "Elective 2", "Elective 3", "Elective 4", "Capstone Course", "Disciplinary Communications" ] 
 
 ce.extend(ce_digital_hardware)
