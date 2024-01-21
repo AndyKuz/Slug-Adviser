@@ -55,7 +55,8 @@ class Digraph:
             self.all_courses.remove(c)
 
     # chooses the classes for a given quarter
-    def choose_quarter(self, num_classes, min_credits, max_credits, min_hours, max_hours):
+    # quarter: 0 -> Fall, 1 -> Winter, 2 -> Spring 
+    def choose_quarter(self, num_classes, min_credits, max_credits, min_hours, max_hours, quarter):
         chosen_classes = []
         
         if len(self.root_courses) == 0:
@@ -65,12 +66,18 @@ class Digraph:
         else:
             curr_course = random.randrange(0, len(self.root_courses)-1)
         
-        chosen_classes.append(self.root_courses[curr_course])
+        # randomly iterates through root courses until it finds one that works for the "quarter"
+        while True:
+            if quarter in self.root_courses[curr_course].quarters:
+                chosen_classes.append(self.root_courses[curr_course])
+                break
+            else:
+                curr_course = random.randrange(0, len(self.root_courses)-1)
 
         # iterates through all other root nodes first
         for c in self.root_courses:
             if c in chosen_classes: continue
-            if self.check_class_compatibility(chosen_classes[-1], c, min_credits, max_credits, min_hours, max_hours):
+            if self.check_class_compatibility(chosen_classes[-1], c, min_credits, max_credits, min_hours, max_hours, quarter):
                 chosen_classes.append(c)
                 if len(chosen_classes) == num_classes:
                     break
@@ -83,7 +90,9 @@ class Digraph:
 
 
     # checks compatibility btwn two classes by checking if they fit into range of credits and hours   
-    def check_class_compatibility(self, c1, c2,  min_credits, max_credits, min_hours, max_hours):
+    def check_class_compatibility(self, c1, c2,  min_credits, max_credits, min_hours, max_hours, quarter):
+        if quarter not in c2.quarters:
+            return False
         total_class_credits = c1.num_credits + c2.num_credits
 
         if total_class_credits >= min_credits and total_class_credits <= max_credits:
@@ -92,7 +101,7 @@ class Digraph:
     
     # sorts root_courses by outgoing_prereqs
     def sort_root_courses_by_outgoing(self):
-        get_outgoing_prereqs = lambda course: len(course.outgoing_prereqs)
+        get_outgoing_prereqs = lambda course: course.priority_rating
         self.root_courses.sort(key=get_outgoing_prereqs, reverse=True)
 
 
