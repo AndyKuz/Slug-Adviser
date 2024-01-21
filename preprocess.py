@@ -43,6 +43,19 @@ def save_data():
             college_year = 2
         elif user_pref.currentYear == "Senior":
             college_year = 3
+        
+        print("??")
+        print("major courses: ", major_courses)
+        print("user")
+        quarters = schedule_maker.create_schedule(major_courses, user_pref.get_courses_taken(), college_year, placeholder_courses)
+        print(quarters)
+        plan_data = py2jsonconvert.convert(quarters)
+        
+        print("finished preprocess:")
+        print("college year: ", college_year)
+        print("min hours: ", user_pref.get_min_hours_work(), " max hours: ", user_pref.get_max_hours_work)
+        print("major courses: ", major_courses)
+        print("courses_taken: ", user_pref.get_courses_taken())
 
         major_courses = []
         placeholder_courses = []
