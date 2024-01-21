@@ -11,6 +11,7 @@ class Digraph:
             self.all_courses.append(c)
         if c not in self.root_courses:
             self.root_courses.append(c)
+            self.sort_root_courses_by_outgoing()
 
     # adds a directional edge from c1 to c2
     def add_edge(self, c1, c2):
@@ -27,6 +28,7 @@ class Digraph:
         # if c2 was in root_nodes remove it
         if c2 in self.root_courses:
             self.root_courses.remove(c2)
+            self.sort_root_courses_by_outgoing()
 
         if c2 not in c1.outgoing_prereqs:
             c1.outgoing_prereqs.append(c2)
@@ -46,7 +48,6 @@ class Digraph:
             self.del_edge(c, c_outgoing)
             if len(c_outgoing.incoming_prereqs) == 0:
                 self.root_courses.append(c_outgoing)
-                self.sort_root_courses_by_outgoing
     
         if c in self.root_courses:
             self.root_courses.remove(c)
@@ -77,6 +78,7 @@ class Digraph:
         # delete classes that were chosen
         for c in chosen_classes:
             self.del_course(c)
+        self.sort_root_courses_by_outgoing()
         return chosen_classes
 
 
@@ -92,7 +94,6 @@ class Digraph:
     def sort_root_courses_by_outgoing(self):
         get_outgoing_prereqs = lambda course: len(course.outgoing_prereqs)
         self.root_courses.sort(key=get_outgoing_prereqs, reverse=True)
-        
 
 
 

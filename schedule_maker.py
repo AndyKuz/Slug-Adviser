@@ -1,5 +1,6 @@
 from digraph import Digraph
 from course import Course
+from course import Quarter
 
 from datetime import date
 
@@ -45,6 +46,7 @@ def remove_taken_classes(dg, l):
 """
 def create_schedule(course_list, taken_courses, current_year):
     dg = create_digraph(course_list)
+    quarters_list = []  # list of quarter class instances representing each quarter
 
     remove_taken_classes(dg, taken_courses) # removes all classes already taken from digraph
 
@@ -52,7 +54,10 @@ def create_schedule(course_list, taken_courses, current_year):
     current_quarter_string = ""
     current_year_string = ""
 
-    for i in range(1, 12):
+    for i in range(1, 13):
+        # TODO:...
+        # quarters_list.append(Quarter())
+
         # stores current quarter
         if i in [1, 4, 7, 10]:
             current_quarter_string = "Fall"
