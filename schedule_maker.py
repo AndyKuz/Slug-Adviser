@@ -43,7 +43,7 @@ def remove_taken_classes(dg, l):
     bases it off of inputed college year and pre_taken classes
     calculates current quarter by datetime
 """
-def create_schedule(course_list, taken_courses, current_year, ):
+def create_schedule(course_list, taken_courses, current_year):
     dg = create_digraph(course_list)
 
     remove_taken_classes(dg, taken_courses) # removes all classes already taken from digraph
