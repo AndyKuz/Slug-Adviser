@@ -1,8 +1,8 @@
 from course import Course
-import schedule_maker
+from ratemyprofessorwebscrape import rmp_exec
 
 math_3 = Course(dptmnt='MATH', dptmnt_num='3', course_title='Precalculus', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[]) #in development
-math_19a = Course(dptmnt='MATH', dptmnt_num='19A', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[math_3], quarters=[0, 1, 2], profs=[])
+math_19a = Course(dptmnt='MATH', dptmnt_num='19A', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[])
 math_19b = Course(dptmnt='MATH', dptmnt_num='19B', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[math_19a], quarters=[0, 1, 2], profs=[])
 math_23a = Course(dptmnt='MATH', dptmnt_num='23A', course_title='Vector Calculus', num_credits=5, incoming_prereqs=[math_19b], quarters=[0, 1, 2], profs=[])
 math_23b = Course(dptmnt='MATH', dptmnt_num='23B', course_title='Vector Calculus', num_credits=5, incoming_prereqs=[math_23a], quarters=[0, 1, 2], profs=[])
@@ -19,10 +19,10 @@ phys_5a = Course(dptmnt='PHYS', dptmnt_num='5A/L', course_title='Introduction to
 phys_5c = Course(dptmnt='PHYS', dptmnt_num='5C/N', course_title='Introduction to Physics III', num_credits=6, incoming_prereqs=[phys_5a], quarters=[0, 1], profs=["Sriram Shastry", "Sergey Syzranov"])
 phys_5b = Course(dptmnt='PHYS', dptmnt_num='5B/M', course_title='Introduction to Physics II', num_credits=6, incoming_prereqs=[phys_5a,], quarters=[2], profs=[])
 phys_5d = Course(dptmnt='PHYS', dptmnt_num='5D', course_title='Introduction to Physics IV', num_credits=5, incoming_prereqs=[phys_5a, phys_5b], quarters=[0], profs=["Stefano Profumo"])
-cse_100 = Course(dptmnt='CSE', dptmnt_num='100/L', course_title='Logic Design', num_credits=7, incoming_prereqs=[cse_12], quarters=[0, 1, 2], profs=[])
-cse_101 = Course(dptmnt='CSE', dptmnt_num='101', course_title='Introduction to Data Structures and Algorithms', num_credits=5, incoming_prereqs=[cse_12, cse_13s, cse_16, math_19b], quarters=[0, 1, 2], profs=[])
+cse_100 = Course(dptmnt='CSE', dptmnt_num='100/L', course_title='Logic Design', num_credits=7, incoming_prereqs=[cse_12], quarters=[0, 1, 2], profs=["Martine Shclag"])
+cse_101 = Course(dptmnt='CSE', dptmnt_num='101', course_title='Introduction to Data Structures and Algorithms', num_credits=5, incoming_prereqs=[cse_12, cse_13s, cse_16, math_19b], quarters=[0, 1, 2], profs=["Patrick Tantalo"])
 cse_102 = Course(dptmnt='CSE', dptmnt_num='102', course_title='Introduction to Analysis of Algorithms', num_credits=5, incoming_prereqs=[cse_101], quarters=[0, 1, 2], profs=[])
-cse_103 = Course(dptmnt='CSE', dptmnt_num='103', course_title='Computational Models', num_credits=5, incoming_prereqs=[cse_101], quarters=[0, 1, 2], profs=[])
+cse_103 = Course(dptmnt='CSE', dptmnt_num='103', course_title='Computational Models', num_credits=5, incoming_prereqs=[cse_101], quarters=[0, 1, 2], profs=["Daniel Fremont"])
 cse_107 = Course(dptmnt='CSE', dptmnt_num='107', course_title='Probability and Statistics for Engineers', num_credits=5, incoming_prereqs=[cse_16, am_30], quarters=[0, 1, 2], profs=[])
 cse_113 = Course(dptmnt='CSE', dptmnt_num='113', course_title='Parallel and Concurrent Programming', num_credits=5, incoming_prereqs=[cse_12, cse_101], quarters=[0, 1, 2], profs=[])
 cse_120 = Course(dptmnt='CSE', dptmnt_num='120', course_title='Computer Architecture', num_credits=5, incoming_prereqs=[cse_12, cse_13s], quarters=[0, 1, 2], profs=[])
@@ -45,7 +45,7 @@ cse_121 = Course(dptmnt='CSE', dptmnt_num='121', course_title='Embedded System D
 cse_122 = Course(dptmnt='CSE', dptmnt_num='122', course_title='Introduction to VLSI Digital System Design', num_credits=5, incoming_prereqs=[cse_100, ece_101], quarters=[1], profs=[])
 cse_220 = Course(dptmnt='CSE', dptmnt_num='220', course_title='Computer Architecture', num_credits=5, incoming_prereqs=[cse_120], quarters=[0, 2], profs=[])
 ece_103 = Course(dptmnt='ECE', dptmnt_num='103/L', course_title='Signals and Systems', num_credits=7, incoming_prereqs=[ece_101, am_20], quarters=[0, 2], profs=[])
-cse_112orcse_114a = Course(dptmnt='CSE', dptmnt_num='112 or 114A', course_title='Comparative Programming Languages', num_credits=5, incoming_prereqs=[cse_101], quarters=[0, 1, 2], profs=[])
+cse_112orcse_114a = Course(dptmnt='CSE', dptmnt_num='112 or 114A', course_title='Comparative Programming Languages', num_credits=5, incoming_prereqs=[cse_101], quarters=[0, 1, 2], profs=["Lindsey Kuper"])
 stat_131orcse_107 = Course(dptmnt='STAT or CSE', dptmnt_num='131 or 107', course_title='Introduction to Probability Theory', num_credits=5, incoming_prereqs=[math_19b], quarters=[0, 1, 2], profs=[])
 
 ce = [math_19a, math_19b, am_10, am_20, am_30, cse_20, cse_30, cse_12, cse_13s, cse_16,phys_5a, 
@@ -112,13 +112,39 @@ course_dict = {
     'stat_131orcse_107': stat_131orcse_107,
 }
 
+def rmp(l):
+    print("in rmp")
+    for c in l:
+        print("in courses")
+        best_prof = ""
+        min_rating = 10
+        for p in c.profs:
+            print("in profs")
+            print("P: ", p)
+            curr_rating = rmp_exec(p)[0]
+            if curr_rating < min_rating:
+                min_rating = curr_rating
+                best_prof = p
 
+              
+
+def get_ce_placeholder():
+    return ce_placeholders
+
+def get_cs_placeholders():
+    return cs_placeholders
+
+def get_ee_placeholder():
+    return ee_placeholders
 
 def get_ce_courses():
     return ce
 
 def get_cs_courses():
     return cs
+
+def get_ee_courses():
+    return ee
 
 def get_courseInfo():
     return course_dict
@@ -129,5 +155,3 @@ def get_courseInfo():
 # ```
 
 # CE.extend(ce_digital_hardware)
-
-# schedule_maker.create_schedule(CS, [cse_20, cse_30, math_19a, math_19b], 1, cs_placeholders)
