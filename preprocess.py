@@ -26,7 +26,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-json_file_path = "./SampleClasses.json"
+json_file_path = "./output.json"
 
 with open(json_file_path, 'r') as json_file:
     data = json.load(json_file)
