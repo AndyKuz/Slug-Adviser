@@ -58,7 +58,14 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
     current_quarter_string = ""
     current_year_string = ""
 
+    num_three_class_quarters = (len(course_list) - len(taken_courses)) + len(placeholder_classes) - 24
+    quarter_three_class_start = 12 - num_three_class_quarters   # calculates when to start taking 3 classes
     for i in range(0, 12):
+        # need to check up here for proper code flow, used below
+        all_courses_empty = False if len(dg.all_courses) else True
+
+        curr_num_courses = 3 if i >= quarter_three_class_start else 2
+
         # stores current quarter
         if i in [0, 3, 6, 9]:
             current_quarter_string = "Fall"
@@ -90,52 +97,58 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
         # only chooses classes if the iterated year/quarter is past the actual current year/quarter
         if current_year == 1:
             if i > datetime_quarter:
-                chosen_classes = dg.choose_quarter(2, 10, 12, 0, 100, current_quarter_int)
+                chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
         elif current_year == 2:
             if i > datetime_quarter + 3:
-                chosen_classes = dg.choose_quarter(2, 10, 12, 0, 100, current_quarter_int)
+                chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
         elif current_year == 3:
             if i > datetime_quarter + 6:
-                chosen_classes = dg.choose_quarter(2, 10, 12, 0, 100, current_quarter_int)
+                chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
         elif current_year == 4:
             if i > datetime_quarter + 9:
-                chosen_classes = dg.choose_quarter(2, 10, 12, 0, 100, current_quarter_int)
+                chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
         
-        courses2json = []
-        if len(dg.all_courses) == 0:    # for placeholder classes after #'d classes finish
-            if len(placeholder_classes) >= 1:
-                courses2json.append(placeholder_classes)
-                print("     ", placeholder_classes.pop(0))
-            if len(placeholder_classes) >= 1:
-                courses2json.append(placeholder_classes)
-                print("     ", placeholder_classes.pop(0))
-        elif not chosen_classes or chosen_classes == -1:   # prints placeholders if classes not chose
-            print("x\nx")
+        course2json = []
+        if all_courses_empty:    # for placeholder classes after #'d classes finish
+            for i in range(0, curr_num_courses):
+                if len(placeholder_classes) >= 1:
+                    course2json.append(placeholder_classes[0]) # to json
+                    print("     ", placeholder_classes.pop(0))  # to console
+                else:
+                    course2json.append(" ") # to json
+                    print("     x") # to console
+        elif not chosen_classes or chosen_classes == -1:
+            for i in range(0, curr_num_courses):
+                course2json.append(" ") # to json
+                print("     x") # to console
         elif len(chosen_classes) == 1:
-            print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)
+            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num)) # to json
+            print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
+            if curr_num_courses == 2:
+                if len(placeholder_classes) >= 1:
+                    course2json.append(placeholder_classes[0])  # to json
+                    print("     ", placeholder_classes.pop(0))  #  to console
+            else:
+                for i in range(0, 2):
+                    if len(placeholder_classes) >= 1:
+                        course2json.append(placeholder_classes[0])  # to json
+                        print("     ", placeholder_classes.pop(0))  # to console
+        elif len(chosen_classes) == 2 and curr_num_courses == 3:
+            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num))   # to json
+            print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
+            course2json.append((chosen_classes[1].dptmnt + " " + chosen_classes[1].dptmnt_num))   # to json
+            print("     ", chosen_classes[1].dptmnt, chosen_classes[1].dptmnt_num)  # to console
             if len(placeholder_classes) >= 1:
-                courses2json.append(placeholder_classes)
-                print("     ", placeholder_classes.pop(0))
-        else:
+                course2json.append(placeholder_classes[0])  # to json
+                print("     ", placeholder_classes.pop(0))  # to console
+        elif len(chosen_classes) > 1:
             for c in chosen_classes:
-                print("     ", c.dptmnt, c.dptmnt_num)
+                course2json.append((c.dptmnt + " " + c.dptmnt_num)) # to json  
+                print("     ", c.dptmnt, c.dptmnt_num)  # to console
+        else:
+            course2json.append(" ") # to json
+            course2json.append(" ") # to json
+            print("     x\n     x") # to console
         print()
-        quarters_list.append(Quarter(current_quarter_string, current_quarter_string, courses2json))
+        quarters_list.append(Quarter(current_quarter_string, current_quarter_string, course2json))
     return quarters_list
-
-# CS MAJOR LOWER DIV TEST
-'''
-cse_20 = Course("cse", "20", "",  5, [])
-math_19A = Course("math", "19A", "",  5, [])
-math_19B = Course("math", "19B", "",  5, [math_19A])
-cse_12 = Course("cse", "12", "",  5, [cse_20])
-cse_16 = Course("cse", "16", "",  5, [math_19A, math_19B])
-cse_30 = Course("cse", "30", "",  5, [cse_20, math_19A])
-cse_13s = Course("cse", "13s", "",  7, [cse_12])
-am_10 = Course("am", "10", "",  5, [])
-am_30 = Course("am", "30", "",  5, [am_10])
-ece_30 = Course("ece", "30", "",  5, [])
-cse_101 = Course("cse", "101", "",  5, [cse_12, cse_13s, cse_16, cse_30, math_19B])
-
-course_list = [cse_20, math_19A, math_19B, cse_12, cse_16, cse_30, cse_13s, am_10, am_30, ece_30, cse_101]
-'''
