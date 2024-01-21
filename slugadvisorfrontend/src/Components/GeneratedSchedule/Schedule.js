@@ -42,7 +42,7 @@ const PlanTable = ({ planData }) => {
                     key={`placeholder-course-${yearIndex}-${quarterIndex}-${coursesIndex}`}
                     name={course.dptmnt}
                     dptmntNum={course.dptmnt_num}
-                    title={course.course_title}
+                    title={[course.course_title, course.best_prof, course.best_prof_rating]}
                   />
                 ))}
               </td>

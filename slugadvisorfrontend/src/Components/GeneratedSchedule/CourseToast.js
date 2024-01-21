@@ -9,12 +9,12 @@ const CourseToast = ({ dptmntNum, name, title }) => {
 
   return (
     <>
-    {title &&
+    {dptmntNum &&
       <Button onClick={toggleShow} className="mb-2">
         {name} {dptmntNum}
       </Button>
     }
-    {title &&
+    {dptmntNum &&
       <Toast   show={show}
         onClose={toggleShow}
         style={{
