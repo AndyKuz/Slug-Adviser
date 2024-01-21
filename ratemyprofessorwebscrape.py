@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from googlesearch import search
-import professor
+from professor import Professor
 import course
 import studentpreferences
 
@@ -22,16 +22,18 @@ def find_professor_url(professorName, site):
 
 
 def rmp_exec(professorName):
-
+    # print("R U N N I N G RMP EXEC()")
     # professorName = 'Linsey Kuper'
     # site_to_search = 'ratemyprofessors.com'
 
     PROFESSOR_URL = find_professor_url(professorName, 'ratemyprofessors.com')
-
+    flag = False
     if PROFESSOR_URL:
-        print(f"The URL for {professorName} on {'ratemyprofessors.com'} is: {PROFESSOR_URL}")
+        flag = True
+        # print(f"The URL for {professorName} on {'ratemyprofessors.com'} is: {PROFESSOR_URL}")
     else: #error handling
-        print(f"No URL found for {professorName} on {'ratemyprofessors.com'}.")
+        flag = False
+        # print(f"No URL found for {professorName} on {'ratemyprofessors.com'}.")
 
 
     RMP_URL = PROFESSOR_URL
@@ -50,7 +52,7 @@ def rmp_exec(professorName):
 
             fullName = f"{firstName} {lastName}"
 
-            print("TEST - Professor's Full Name:", fullName)
+            # print("TEST - Professor's Full Name:", fullName)
         else: #Error Handling
             print("Name element not found.")
 
@@ -58,7 +60,7 @@ def rmp_exec(professorName):
             difficultyElement = feedbackElements[1].find('div', {'class': 'FeedbackItem__FeedbackDescription-uof32n-2', 'class': 'kkESWs'})
             if difficultyElement:
                 professorDifficulty = difficultyElement.text.strip()
-                print("TEST - Level of Difficulty:", professorDifficulty)
+                # print("TEST - Level of Difficulty:", professorDifficulty)
             else: #Error Handling
                 print("Difficulty element not found.")
         else: #Error Handling
@@ -66,7 +68,7 @@ def rmp_exec(professorName):
 
         if ratingElement:
             professorRating = ratingElement.find('div', {'class': 'RatingValue__Numerator-qw8sqy-2'}).text.strip()
-            print("TEST - Professor Rating:", professorRating)
+            # print("TEST - Professor Rating:", professorRating)
         else: #Error Handling
             print("Rating element not found.")
 
@@ -77,12 +79,15 @@ def rmp_exec(professorName):
 
 
 def main():
-    professorKuper = professor()
+    professorKuper = Professor('1','2', '3')
     professorKuper.professorName = 'Lindsey Kuper'
-    professorKuper.professorRating = rmp_exec.get(0)
-    professorKuper.professorDifficulty = rmp_exec.get(1)
+    ratingDifficulty = rmp_exec(professorKuper.professorName)
+    professorKuper.professorRating = ratingDifficulty[0]
+    professorKuper.professorDifficulty = ratingDifficulty[1]
 
-    print("TESTING MAIN KUPER RATING: ", professorKuper.professorRating)
-    print("TESTING MAIN KUPER DIFFICULTY: ", professorKuper.professorDifficulty)
-    print("TESTING THIS IS KUPER: ", professorKuper.professorName)
+    # print("TESTING MAIN KUPER RATING: ", professorKuper.professorRating)
+    # print("TESTING MAIN KUPER DIFFICULTY: ", professorKuper.professorDifficulty)
+    # print("TESTING THIS IS KUPER: ", professorKuper.professorName)
 
+if __name__ == '__main__':
+    main()
