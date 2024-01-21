@@ -20,7 +20,7 @@ function AccordionComponent() {
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="2">
-        <Accordion.Header>Once You Have Entereed Your classes Select Your Preferences</Accordion.Header>
+        <Accordion.Header>Select Your Preferences</Accordion.Header>
         <Accordion.Body>
         <UserPreferences></UserPreferences>
         </Accordion.Body>

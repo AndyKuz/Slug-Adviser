@@ -12,8 +12,8 @@ export const SharedProvider = ({ children }) => {
     MinCredits: 12,
     MaxCredits: 21,
     CoursesTaken:[],
-    Major: "",
-    CurrentYear: ""
+    Major: "Computer Science",
+    CurrentYear: "Freshman"
   });
 
   const updateSharedState = (newState) => {
