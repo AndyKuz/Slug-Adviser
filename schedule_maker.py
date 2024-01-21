@@ -75,16 +75,16 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
 
         # stores current college year
         if i >= 0 and i <= 2:
-            current_year_string = "Freshman"
+            current_year_string = "First year"
         elif i >= 3 and i <= 5:
-            current_year_string = "Sophomore"
+            current_year_string = "Second year"
         elif i >= 6 and i <= 8:
-            current_year_string = "Junior"
+            current_year_string = "Third year"
         elif i >= 9 and i <= 11:
-            current_year_string = "Senior"
+            current_year_string = "Fourth year"
 
         # prints out header above classes
-        print(current_year_string, current_quarter_string)
+        print(current_year_string, current_quarter_string) 
         chosen_classes = -1
 
         # only chooses classes if the iterated year/quarter is past the actual current year/quarter
@@ -101,24 +101,30 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
             if i > datetime_quarter + 9:
                 chosen_classes = dg.choose_quarter(2, 10, 12, 0, 100, current_quarter_int)
         
+        courses2json = []
         if len(dg.all_courses) == 0:    # for placeholder classes after #'d classes finish
             if len(placeholder_classes) >= 1:
+                courses2json.append(placeholder_classes)
                 print("     ", placeholder_classes.pop(0))
             if len(placeholder_classes) >= 1:
+                courses2json.append(placeholder_classes)
                 print("     ", placeholder_classes.pop(0))
         elif not chosen_classes or chosen_classes == -1:   # prints placeholders if classes not chose
             print("x\nx")
         elif len(chosen_classes) == 1:
             print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)
             if len(placeholder_classes) >= 1:
+                courses2json.append(placeholder_classes)
                 print("     ", placeholder_classes.pop(0))
         else:
             for c in chosen_classes:
                 print("     ", c.dptmnt, c.dptmnt_num)
         print()
+        quarters_list.append(Quarter(current_quarter_string, current_quarter_string, courses2json))
+    return quarters_list
 
 # CS MAJOR LOWER DIV TEST
-"""
+'''
 cse_20 = Course("cse", "20", "",  5, [])
 math_19A = Course("math", "19A", "",  5, [])
 math_19B = Course("math", "19B", "",  5, [math_19A])
@@ -132,4 +138,4 @@ ece_30 = Course("ece", "30", "",  5, [])
 cse_101 = Course("cse", "101", "",  5, [cse_12, cse_13s, cse_16, cse_30, math_19B])
 
 course_list = [cse_20, math_19A, math_19B, cse_12, cse_16, cse_30, cse_13s, am_10, am_30, ece_30, cse_101]
-"""
+'''
