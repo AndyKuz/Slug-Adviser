@@ -1,5 +1,6 @@
 from course import Course
 import schedule_maker
+import py2jsonconvert
 
 math_3 = Course(dptmnt='MATH', dptmnt_num='3', course_title='Precalculus', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[]) #in development
 math_19a = Course(dptmnt='MATH', dptmnt_num='19A', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[math_3], quarters=[0, 1, 2], profs=[])
@@ -112,4 +113,6 @@ def get_courseInfo():
 
 # CE.extend(ce_digital_hardware)
 
-# schedule_maker.create_schedule(CS, [cse_20, cse_30, math_19a, math_19b], 1, cs_placeholders)
+# schedule_maker.create_schedule(CS, [cse_20, cse_30, math_19a], 1, cs_placeholders)
+
+#py2jsonconvert.convert(test)
