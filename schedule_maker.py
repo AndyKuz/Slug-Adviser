@@ -48,6 +48,7 @@ def remove_taken_classes(dg, taken_classes):
     calculates current quarter by datetime
 """
 def create_schedule(course_list, taken_courses, current_year, placeholder_classes):
+    print("placehodlers: ", placeholder_classes)
     dg = create_digraph(course_list)
     quarters_list = []  # list of quarter class instances representing each quarter
 
@@ -95,19 +96,22 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
         chosen_classes = -1
 
         # only chooses classes if the iterated year/quarter is past the actual current year/quarter
-        if current_year == 1:
+        print("current year: ", current_year)
+        if current_year == 0:
             if i > datetime_quarter:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
-        elif current_year == 2:
+        elif current_year == 1:
             if i > datetime_quarter + 3:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
-        elif current_year == 3:
+        elif current_year == 2:
             if i > datetime_quarter + 6:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
-        elif current_year == 4:
+        elif current_year == 3:
             if i > datetime_quarter + 9:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
         
+        print("chosen classes: ", chosen_classes)
+
         course2json = []
         if all_courses_empty:    # for placeholder classes after #'d classes finish
             for i in range(0, curr_num_courses):
@@ -122,7 +126,7 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
                 course2json.append(" ") # to json
                 print("     x") # to console
         elif len(chosen_classes) == 1:
-            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num)) # to json
+            course2json.append(chosen_classes[0].to_dict()) # to json
             print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
             if curr_num_courses == 2:
                 if len(placeholder_classes) >= 1:
@@ -134,21 +138,21 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
                         course2json.append(placeholder_classes[0])  # to json
                         print("     ", placeholder_classes.pop(0))  # to console
         elif len(chosen_classes) == 2 and curr_num_courses == 3:
-            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num))   # to json
+            course2json.append(chosen_classes[0].to_dict())   # to json
             print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
-            course2json.append((chosen_classes[1].dptmnt + " " + chosen_classes[1].dptmnt_num))   # to json
+            course2json.append(chosen_classes[1].to_dict())   # to json
             print("     ", chosen_classes[1].dptmnt, chosen_classes[1].dptmnt_num)  # to console
             if len(placeholder_classes) >= 1:
                 course2json.append(placeholder_classes[0])  # to json
                 print("     ", placeholder_classes.pop(0))  # to console
         elif len(chosen_classes) > 1:
             for c in chosen_classes:
-                course2json.append((c.dptmnt + " " + c.dptmnt_num)) # to json  
+                course2json.append(c.to_dict()) # to json  
                 print("     ", c.dptmnt, c.dptmnt_num)  # to console
         else:
             course2json.append(" ") # to json
             course2json.append(" ") # to json
             print("     x\n     x") # to console
         print()
-        quarters_list.append(Quarter(current_quarter_string, current_quarter_string, course2json))
+        quarters_list.append(Quarter(current_year_string, current_quarter_string, course2json))
     return quarters_list

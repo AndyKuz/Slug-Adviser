@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import CourseToast from './CourseToast';
 
 const PlanTable = ({ planData }) => {
   if (!planData) {
@@ -9,6 +10,7 @@ const PlanTable = ({ planData }) => {
   if (planData.error) {
     return <p>Error loading data. Please try again.</p>; // Display an error message if there's an issue with the data
   }
+
   return (
     <Table striped>
       <thead>
@@ -25,11 +27,24 @@ const PlanTable = ({ planData }) => {
             <td>{yearData.year}</td>
             {yearData.quarters.map((quarterData, quarterIndex) => (
               <td key={`quarter-cell-${yearIndex}-${quarterIndex}`}>
-                <ul>
-                  {quarterData.courses.map((courses, coursesIndex) => (
-                    <li key={`goal-item-${yearIndex}-${quarterIndex}-${coursesIndex}`}>{courses}</li>
-                  ))}
-                </ul>
+                {/* Handle major courses */}
+                {quarterData.major_courses.map((course, coursesIndex) => (
+                  <CourseToast
+                    key={`major-course-${yearIndex}-${quarterIndex}-${coursesIndex}`}
+                    name={course.dptmnt}
+                    dptmntNum={course.dptmnt_num}
+                    title={`${course.course_title}\n Credits: ${course.num_credits}`}
+                  />
+                ))}
+                {/* Handle placeholder courses */}
+                {quarterData.placeholder_courses.map((course, coursesIndex) => (
+                  <CourseToast
+                    key={`placeholder-course-${yearIndex}-${quarterIndex}-${coursesIndex}`}
+                    name={course.dptmnt}
+                    dptmntNum={course.dptmnt_num}
+                    title={`${course.course_title}\nCredits: ${course.num_credits}`}
+                  />
+                ))}
               </td>
             ))}
           </tr>

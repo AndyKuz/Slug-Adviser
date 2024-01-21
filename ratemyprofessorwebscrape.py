@@ -4,24 +4,34 @@ from googlesearch import search
 from professor import Professor
 import course
 import studentpreferences
+import certifi
+import urllib3
+http = urllib3.PoolManager()
+
 
     
-def find_professor_url(professorName, site):
-    query = f"{professorName} site:{site}"
+def find_professor_url(professor_name, site):
+    query = f'{professor_name} site:{site}'
 
     # Perform a Google search
-    searchResults = search(query, num=5, stop=5, pause=2)
+    search_results = search(query, num=1, stop=1, pause=2)
 
     # Iterate through the search results
-    for result in searchResults:
+    for result in search_results:
         if site in result:
             return result
+
+    print(f"No results found for professor: {professor_name}")
+
+    # except Exception as e:
+    #     print(f"An error occurred: {e}")
 
     return None
 
 
 
 def rmp_exec(professorName):
+    print("in rmp exec")
     # print("R U N N I N G RMP EXEC()")
     # professorName = 'Linsey Kuper'
     # site_to_search = 'ratemyprofessors.com'
@@ -37,7 +47,9 @@ def rmp_exec(professorName):
 
 
     RMP_URL = PROFESSOR_URL
-    response = requests.get(RMP_URL)
+    # response = requests.get(RMP_URL, verify=False)
+    response = http.request('GET', RMP_URL, retries=False, verify=False)
+
 
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -78,16 +90,16 @@ def rmp_exec(professorName):
         print("Failed to retrieve the webpage. Status code:", response.status_code)
 
 
-def main():
-    professorKuper = Professor('1','2', '3')
-    professorKuper.professorName = 'Lindsey Kuper'
-    ratingDifficulty = rmp_exec(professorKuper.professorName)
-    professorKuper.professorRating = ratingDifficulty[0]
-    professorKuper.professorDifficulty = ratingDifficulty[1]
+# def main():
+#     professorKuper = Professor('1','2', '3')
+#     professorKuper.professorName = 'Lindsey Kuper'
+#     ratingDifficulty = rmp_exec(professorKuper.professorName)
+#     professorKuper.professorRating = ratingDifficulty[0]
+#     professorKuper.professorDifficulty = ratingDifficulty[1]
 
-    # print("TESTING MAIN KUPER RATING: ", professorKuper.professorRating)
-    # print("TESTING MAIN KUPER DIFFICULTY: ", professorKuper.professorDifficulty)
-    # print("TESTING THIS IS KUPER: ", professorKuper.professorName)
+#     # print("TESTING MAIN KUPER RATING: ", professorKuper.professorRating)
+#     # print("TESTING MAIN KUPER DIFFICULTY: ", professorKuper.professorDifficulty)
+#     # print("TESTING THIS IS KUPER: ", professorKuper.professorName)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
