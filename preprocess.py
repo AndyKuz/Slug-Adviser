@@ -27,7 +27,7 @@ from courseInfo import get_courseInfo
 
 app = Flask(__name__)
 CORS(app)
-
+FRONT_END_DATA = None #for now
 json_file_path = "./SampleClasses.json"
 
 with open(json_file_path, 'r') as json_file:
@@ -47,7 +47,7 @@ def plan_data():
 @app.route('/saveData', methods=['POST'])
 def save_data():
     try:
-        data = request.get_json()
+        FRONT_END_DATA = request.get_json()
         
         # Process and handle the data received from the frontend
         print('Received data from frontend:', data)
@@ -108,7 +108,7 @@ class AlgoInfo:
 def ApIbConverter(userPref):
     # print("ENTERED AP IB CONVERTER METHOD")
     
-    userPreferences = parse_json()
+    userPreferences = parse_json(FRONT_END_DATA)
     
     APScore3 = userPref.APScore3
     APScore4 = userPref.APScore4
