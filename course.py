@@ -1,6 +1,7 @@
 class Course:
     def __init__(self, dptmnt, dptmnt_num, course_title, num_credits, incoming_prereqs,
-                  hours=30, outgoing_prereqs=None, quarters=None, profs=None, best_prof="", best_prof_rating=2.5):
+                  hours=30, outgoing_prereqs=None, quarters=None, profs=None, best_prof="", 
+                  best_prof_rating=2.5):
         self.dptmnt = dptmnt
         self.dptmnt_num = dptmnt_num
         self.course_title = course_title
@@ -12,6 +13,10 @@ class Course:
         self.profs = profs if profs is not None else []
         self.best_prof = best_prof
         self.best_prof_rating = best_prof_rating
+        self.priority_rating = 0
+    
+    def set_priority_rating(self):
+        self.priority_rating = (5 - len(self.quarters)) + len(self.outgoing_prereqs)
 
 class Quarter:
     def __init__(self, college_year, quarter_type, course_list):
