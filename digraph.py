@@ -48,16 +48,18 @@ class Digraph:
             self.del_edge(c, c_outgoing)
             if len(c_outgoing.incoming_prereqs) == 0:
                 self.root_courses.append(c_outgoing)
+                self.sort_root_courses_by_outgoing()
     
         if c in self.root_courses:
             self.root_courses.remove(c)
+            self.sort_root_courses_by_outgoing()
         if c in self.all_courses:
             self.all_courses.remove(c)
 
     # chooses the classes for a given quarter
     # quarter: 0 -> Fall, 1 -> Winter, 2 -> Spring 
-    def choose_quarter(self, num_classes, min_credits, max_credits, min_hours, max_hours, quarter):
-        chosen_classes = []
+    def choose_quarter(self, num_courses, min_credits, max_credits, min_hours, max_hours, quarter):
+        chosen_courses = []
         
         if len(self.root_courses) == 0:
             return -1
@@ -69,33 +71,41 @@ class Digraph:
         # randomly iterates through root courses until it finds one that works for the "quarter"
         while True:
             if quarter in self.root_courses[curr_course].quarters:
-                chosen_classes.append(self.root_courses[curr_course])
+                chosen_courses.append(self.root_courses[curr_course])
                 break
             else:
-                curr_course = random.randrange(0, len(self.root_courses)-1)
+                curr_course = random.randrange(0, len(self.root_courses))
 
-        # iterates through all other root nodes first
+    
+        # iterates once or twice depending on num_classes specified
         for c in self.root_courses:
-            if c in chosen_classes: continue
-            if self.check_class_compatibility(chosen_classes[-1], c, min_credits, max_credits, min_hours, max_hours, quarter):
-                chosen_classes.append(c)
-                if len(chosen_classes) == num_classes:
+            if c in chosen_courses: continue
+            if self.check_class_compatibility(chosen_courses, c, min_credits, max_credits, min_hours, max_hours, quarter, num_courses):
+                chosen_courses.append(c)
+                if len(chosen_courses) == num_courses:
                     break
-        
+
         # delete classes that were chosen
-        for c in chosen_classes:
+        for c in chosen_courses:
             self.del_course(c)
         self.sort_root_courses_by_outgoing()
-        return chosen_classes
+        return chosen_courses
 
 
     # checks compatibility btwn two classes by checking if they fit into range of credits and hours   
-    def check_class_compatibility(self, c1, c2,  min_credits, max_credits, min_hours, max_hours, quarter):
-        if quarter not in c2.quarters:
+    def check_class_compatibility(self, chosen_courses, new_course, min_credits, max_credits, min_hours, max_hours, quarter, num_courses):
+        # adjusts when we are only looking at 2 courses but 3 course overall quarter
+        adjusted_min_credits = (min_credits - 5) if len(chosen_courses) == 1 and num_courses == 3 else min_credits
+        adjusted_max_credits = (max_credits - 5) if len(chosen_courses) == 1 and num_courses == 3 else max_credits
+        
+        if quarter not in new_course.quarters:
             return False
-        total_class_credits = c1.num_credits + c2.num_credits
+        
+        total_class_credits = new_course.num_credits
+        for c in chosen_courses:
+            total_class_credits += c.num_credits
 
-        if total_class_credits >= min_credits and total_class_credits <= max_credits:
+        if total_class_credits >= adjusted_min_credits and total_class_credits <= adjusted_max_credits:
             return True
         return False
     
