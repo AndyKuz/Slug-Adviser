@@ -1,0 +1,89 @@
+{
+    "planData": [
+      {
+        "year": "First Year",
+        "quarters": [
+          {
+            "quarter": "Fall",
+            "courses": ["CSE 20", "Math 19A", "GE"]
+          },
+          {
+            "quarter": "Winter",
+            "courses": ["Develop prototype", "Conduct market research", "Refine project plan"]
+          },
+          {
+            "quarter": "Spring",
+            "courses": ["Begin full-scale development", "Establish marketing strategy", "Conduct user testing"]
+          },
+          {
+            "quarter": "Summer",
+            "courses": ["Launch beta version", "Analyze user feedback", "Adjust development roadmap"]
+          }
+        ]
+      },
+      {
+        "year": "Second Year",
+        "quarters": [
+          {
+            "quarter": "Fall",
+            "courses": ["Set up project milestones", "Hire key team members", "Define project scope"]
+          },
+          {
+            "quarter": "Winter",
+            "courses": ["Develop prototype", "Conduct market research", "Refine project plan"]
+          },
+          {
+            "quarter": "Spring",
+            "courses": ["Begin full-scale development", "Establish marketing strategy", "Conduct user testing"]
+          },
+          {
+            "quarter": "Summer",
+            "courses": ["Launch beta version", "Analyze user feedback", "Adjust development roadmap"]
+          }
+        ]
+      },
+      {
+        "year": "Third Year",
+        "quarters": [
+          {
+            "quarter": "Fall",
+            "courses": ["Set up project milestones", "Hire key team members", "Define project scope"]
+          },
+          {
+            "quarter": "Winter",
+            "courses": ["Develop prototype", "Conduct market research", "Refine project plan"]
+          },
+          {
+            "quarter": "Spring",
+            "courses": ["Begin full-scale development", "Establish marketing strategy", "Conduct user testing"]
+          },
+          {
+            "quarter": "Summer",
+            "courses": ["Launch beta version", "Analyze user feedback", "Adjust development roadmap"]
+          }
+        ]
+      },
+      {
+        "year": "Fourth Year",
+        "quarters": [
+          {
+            "quarter": "Fall",
+            "courses": ["Set up project milestones", "Hire key team members", "Define project scope"]
+          },
+          {
+            "quarter": "Winter",
+            "courses": ["Develop prototype", "Conduct market research", "Refine project plan"]
+          },
+          {
+            "quarter": "Spring",
+            "courses": ["Begin full-scale development", "Establish marketing strategy", "Conduct user testing"]
+          },
+          {
+            "quarter": "Summer",
+            "courses": ["Launch beta version", "Analyze user feedback", "Adjust development roadmap"]
+          }
+        ]
+      }
+    ]
+  }
+  

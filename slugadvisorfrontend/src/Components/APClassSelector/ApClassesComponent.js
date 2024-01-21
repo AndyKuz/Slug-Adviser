@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import allAPClasses from './APCLassList';
 import SearchBar from './Searchbar';
 import { Button } from 'react-bootstrap';
+import { useSharedState } from '../../SharedContext';
 
 const APClassTracker = () => {
+  const {sharedState, updateSharedState } = useSharedState();
   const [classesTaken, setClassesTaken] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [selectedScore, setSelectedScore] = useState('');
@@ -24,46 +26,59 @@ const APClassTracker = () => {
     if (selectedClasses.length === 0 || !selectedScore) {
       return; // Don't add if no classes selected or no score chosen
     }
-
+  
     const newClasses = selectedClasses.map((className) => ({
       className,
       score: parseInt(selectedScore, 10),
     }));
-
+  
     setClassesTaken([...classesTaken, ...newClasses]);
     setSelectedClasses([]);
     setSelectedScore('');
-
+  
     // Update score lists based on the selected score
+    let updatedScores3 = [...scores3, ...newClasses];
+    let updatedScores4 = [...scores4, ...newClasses];
+    let updatedScores5 = [...scores5, ...newClasses];
+  
     switch (selectedScore) {
       case '3':
-        setScores3([...scores3, ...newClasses]);
+        setScores3(updatedScores3);
+        updateSharedState({ APScores3: updatedScores3 });
         break;
       case '4':
-        setScores4([...scores4, ...newClasses]);
+        setScores4(updatedScores4);
+        updateSharedState({ APScores4: updatedScores4 });
         break;
       case '5':
-        setScores5([...scores5, ...newClasses]);
+        setScores5(updatedScores5);
+        updateSharedState({ APScores5: updatedScores5 });
         break;
       default:
         break;
     }
   };
+  
 
   const deletescor3 = (index) => {
     const updatedClasses = [...scores3];
     updatedClasses.splice(index, 1);
     setScores3(updatedClasses);
+    updateSharedState({ APScores3: updatedClasses });
   };
+  
   const deletescor4 = (index) => {
     const updatedClasses = [...scores4];
     updatedClasses.splice(index, 1);
     setScores4(updatedClasses);
+    updateSharedState({ APScores4: updatedClasses });
   };
+  
   const deletescor5 = (index) => {
     const updatedClasses = [...scores5];
     updatedClasses.splice(index, 1);
     setScores5(updatedClasses);
+    updateSharedState({ APScores5: updatedClasses });
   };
   
 

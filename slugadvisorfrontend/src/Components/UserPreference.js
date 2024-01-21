@@ -4,24 +4,43 @@ import Form from 'react-bootstrap/Form';
 import morningclass from '../images/morningclass.jpeg';
 import nightclass from '../images/nightclass.jpeg';
 import graduate from '../images/graduate.jpeg';
-import clock from '../images/clock.jpeg'
+import calander from '../images/calander.png'
 import React, { useState } from 'react';
+import { useSharedState } from '../SharedContext';
 
 function UserPreferences() {
   const [night, setNight] = useState(false);
   const [morning, setMorning] = useState(false);
-  const [Years, setGraduation] = useState(0);
-  const [Credits, setCredits] = useState(0);
+  const [minhoursperweek, setMinHours] = useState(0);
+  const [maxhoursperweek, setMaxHours] = useState(0);
+  const [MinCredits, setMinCredits] = useState(0);
+  const [MaxCredits, setMaxCredits] = useState(0);
+  const { sharedState, updateSharedState } = useSharedState();
 
-  const handleYearInputChange = (event) => {
-    // Update the state with the new input value
-    setGraduation(event.target.value);
+
+  const handleMinHoursInputChange = (event) => {
+    const newhours = event.target.value;
+    setMinHours(newhours);
+    updateSharedState({MinHoursPerWeek: newhours });
+  };
+  const handleMaxHoursInputChange = (event) => {
+    const newhours = event.target.value;
+    setMaxHours(newhours);
+    updateSharedState({MaxHoursPerWeek: newhours });
+  };
+  
+  const handleMinCreditInputChange = (event) => {
+    const newCredits = event.target.value;
+    setMinCredits(newCredits);
+    updateSharedState({ MinCredits: newCredits });
   };
 
-  const handleCreditInputChange = (event) => {
-    // Update the state with the new input value
-    setCredits(event.target.value);
+  const handleMaxCreditInputChange = (event) => {
+    const newCredits = event.target.value;
+    setMaxCredits(newCredits);
+    updateSharedState({ MaxCredits: newCredits });
   };
+  
 
   // Function to handle form submission
   const handleSubmit = (event) => {
@@ -29,7 +48,6 @@ function UserPreferences() {
     event.preventDefault();
 
     // Access the value stored in the variable graduationYears
-    console.log('Graduation Years:', Years);
     // You can now use the value stored in graduationYears as needed
   };
 
@@ -58,19 +76,25 @@ function UserPreferences() {
         </Card.Body>
       </Card>
       <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={clock} />
+        <Card.Img variant="top" src={calander} />
         <Card.Body>
-          <Card.Title>Credit Hours</Card.Title>
+          <Card.Title>Credit Per Quarter</Card.Title>
           <Card.Text>
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>How Many Credits Would you Like to do per Quarter?</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="15"
-                  value={Credits}
-                  onChange={handleCreditInputChange}
+                  placeholder="Minumum 12 Credits"
+                  //value={MinCredits}
+                  onChange={handleMinCreditInputChange}
                 />
+                <br />
+                 <Form.Control 
+                  type="text" 
+                  placeholder="Maxcredits" 
+                  //value={MaxCredits}
+                  onChange={handleMaxCreditInputChange}/>
               </Form.Group>
               <Button variant="primary">Enter</Button>
             </Form>
@@ -81,16 +105,20 @@ function UserPreferences() {
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={graduate} />
         <Card.Body>
-          <Card.Title>Years to Graduate</Card.Title>
+          <Card.Title>Hours Per Week</Card.Title>
           <Card.Text>
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>How Many Years Do You want to Graduate</Form.Label>
+                <Form.Label>How Many Hours a Week Do you want to Work</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="4"
-                  value={Years}
-                  onChange={handleYearInputChange}
+                  placeholder="Minimum hours per Week"
+                  onChange={handleMinHoursInputChange}
+                />
+                <Form.Control
+                  type="text"
+                  placeholder="Maximum Hours per Week"
+                  onChange={handleMaxHoursInputChange}
                 />
               </Form.Group>
               <Button variant="primary">Enter</Button>

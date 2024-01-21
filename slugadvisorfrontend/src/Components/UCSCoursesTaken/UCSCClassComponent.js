@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import allUCSCClasses from './UCSCCLassList';
 import SearchBar from './Searchbar';
 import { Button, ListGroup } from 'react-bootstrap';
+import { useSharedState } from '../../SharedContext';
 
 const UCSCCourseTracker = () => {
   const [classesTaken, setClassesTaken] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
+  const {sharedState, updateSharedState } = useSharedState();
 
   const handleSearchChange = (selectedItems) => {
     setSelectedClasses(selectedItems);
@@ -21,6 +23,7 @@ const UCSCCourseTracker = () => {
     }));
 
     setClassesTaken([...classesTaken, ...newClasses]);
+    updateSharedState({CoursesTaken: [...classesTaken, ...newClasses]});
     setSelectedClasses([]);
   };
 
@@ -28,6 +31,7 @@ const UCSCCourseTracker = () => {
     const updatedClasses = [...classesTaken];
     updatedClasses.splice(index, 1);
     setClassesTaken(updatedClasses);
+    updateSharedState({CoursesTaken: updatedClasses});
   };
 
   return (
