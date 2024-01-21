@@ -82,16 +82,16 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
 
         # stores current college year
         if i >= 0 and i <= 2:
-            current_year_string = "Freshman"
+            current_year_string = "First year"
         elif i >= 3 and i <= 5:
-            current_year_string = "Sophomore"
+            current_year_string = "Second year"
         elif i >= 6 and i <= 8:
-            current_year_string = "Junior"
+            current_year_string = "Third year"
         elif i >= 9 and i <= 11:
-            current_year_string = "Senior"
+            current_year_string = "Fourth year"
 
         # prints out header above classes
-        print(current_year_string, current_quarter_string)
+        print(current_year_string, current_quarter_string) 
         chosen_classes = -1
 
         # only chooses classes if the iterated year/quarter is past the actual current year/quarter
@@ -108,32 +108,47 @@ def create_schedule(course_list, taken_courses, current_year, placeholder_classe
             if i > datetime_quarter + 9:
                 chosen_classes = dg.choose_quarter(curr_num_courses, (5*curr_num_courses), (5*curr_num_courses)+5, 0, 100, current_quarter_int)
         
+        course2json = []
         if all_courses_empty:    # for placeholder classes after #'d classes finish
             for i in range(0, curr_num_courses):
                 if len(placeholder_classes) >= 1:
-                    print("     ", placeholder_classes.pop(0))
+                    course2json.append(placeholder_classes[0]) # to json
+                    print("     ", placeholder_classes.pop(0))  # to console
                 else:
-                    print("     x")
+                    course2json.append(" ") # to json
+                    print("     x") # to console
         elif not chosen_classes or chosen_classes == -1:
             for i in range(0, curr_num_courses):
-                print("     x")
+                course2json.append(" ") # to json
+                print("     x") # to console
         elif len(chosen_classes) == 1:
-            print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)
+            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num)) # to json
+            print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
             if curr_num_courses == 2:
                 if len(placeholder_classes) >= 1:
-                    print("     ", placeholder_classes.pop(0))
+                    course2json.append(placeholder_classes[0])  # to json
+                    print("     ", placeholder_classes.pop(0))  #  to console
             else:
                 for i in range(0, 2):
                     if len(placeholder_classes) >= 1:
-                        print("     ", placeholder_classes.pop(0))
+                        course2json.append(placeholder_classes[0])  # to json
+                        print("     ", placeholder_classes.pop(0))  # to console
         elif len(chosen_classes) == 2 and curr_num_courses == 3:
-            print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)
-            print("     ", chosen_classes[1].dptmnt, chosen_classes[1].dptmnt_num)
+            course2json.append((chosen_classes[0].dptmnt + " " + chosen_classes[0].dptmnt_num))   # to json
+            print("     ", chosen_classes[0].dptmnt, chosen_classes[0].dptmnt_num)  # to console
+            course2json.append((chosen_classes[1].dptmnt + " " + chosen_classes[1].dptmnt_num))   # to json
+            print("     ", chosen_classes[1].dptmnt, chosen_classes[1].dptmnt_num)  # to console
             if len(placeholder_classes) >= 1:
-                print("     ", placeholder_classes.pop(0))
+                course2json.append(placeholder_classes[0])  # to json
+                print("     ", placeholder_classes.pop(0))  # to console
         elif len(chosen_classes) > 1:
             for c in chosen_classes:
-                print("     ", c.dptmnt, c.dptmnt_num)
+                course2json.append((c.dptmnt + " " + c.dptmnt_num)) # to json  
+                print("     ", c.dptmnt, c.dptmnt_num)  # to console
         else:
-            print("     x\n     x")
+            course2json.append(" ") # to json
+            course2json.append(" ") # to json
+            print("     x\n     x") # to console
         print()
+        quarters_list.append(Quarter(current_quarter_string, current_quarter_string, course2json))
+    return quarters_list
