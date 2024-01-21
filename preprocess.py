@@ -48,6 +48,8 @@ def save_data():
             placeholder_courses = courseInfo.get_ce_placeholder()
         else:
             print("Error major not recognized")
+
+        print("placeholders: ", placeholder_courses)
             
         print("?")
         college_year = 0
@@ -79,6 +81,7 @@ def save_data():
         print("\n")
         print("Print Plan Out")
         print(plan_data)
+
         return jsonify(plan_data), 200
     # except Exception as e:
     #     print('Error processing data:', str(e))
@@ -107,7 +110,6 @@ def parse_user_pref(data):
                                   APScore3=ap_scores_3, APScore4=ap_scores_4, APScore5=ap_scores_5)
     
     return userPref
-
 
 # class AlgoInfo:
 #     def __init__(self, userPref):

@@ -48,6 +48,7 @@ def remove_taken_classes(dg, taken_classes):
     calculates current quarter by datetime
 """
 def create_schedule(course_list, taken_courses, current_year, placeholder_classes):
+    print("placehodlers: ", placeholder_classes)
     dg = create_digraph(course_list)
     quarters_list = []  # list of quarter class instances representing each quarter
 

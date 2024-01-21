@@ -116,6 +116,7 @@ def get_ce_placeholder():
     return ce_placeholders
 
 def get_cs_placeholders():
+    print("cs placeholders: ", cs_placeholders)
     return cs_placeholders
 
 def get_ee_placeholder():

@@ -1,3 +1,5 @@
+from flask import Flask, jsonify
+
 class Course:
     def __init__(self, dptmnt, dptmnt_num, course_title, num_credits, incoming_prereqs,
                   hours=30, outgoing_prereqs=None, quarters=None, profs=None, best_prof="", 
