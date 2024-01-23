@@ -21,8 +21,6 @@ def find_professor_url(professor_name, site):
         if site in result:
             return result
 
-    print(f"No results found for professor: {professor_name}")
-
     # except Exception as e:
     #     print(f"An error occurred: {e}")
 
@@ -31,7 +29,6 @@ def find_professor_url(professor_name, site):
 
 
 def rmp_exec(professorName):
-    print("in rmp exec")
     # print("R U N N I N G RMP EXEC()")
     # professorName = 'Linsey Kuper'
     # site_to_search = 'ratemyprofessors.com'

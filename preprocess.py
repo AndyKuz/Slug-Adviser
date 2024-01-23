@@ -32,11 +32,7 @@ CORS(app)
 def save_data():
     # try:
         user_data = request.get_json()
-        print(user_data)
         user_pref = parse_user_pref(user_data)
-        print(user_pref)
-        
-        print("computing...")
         
         major_courses = []
         placeholder_courses = []
@@ -51,10 +47,7 @@ def save_data():
             placeholder_courses = courseInfo.get_ee_placeholder()
         else:
             print("Error major not recognized")
-
-        print("placeholders: ", placeholder_courses)
             
-        print("?")
         college_year = 0
         if user_pref.currentYear == "Freshman":
             college_year = 0
@@ -65,25 +58,10 @@ def save_data():
         elif user_pref.currentYear == "Senior":
             college_year = 3
         
-        print("??")
-        print("major courses: ", major_courses)
-        print("user")
-        quarters = schedule_maker.create_schedule(major_courses, user_pref.get_courses_taken(), college_year, placeholder_courses)
-        print(quarters)
-        plan_data = py2jsonconvert.convert(quarters)
-        
-        print("finished preprocess:")
-        print("college year: ", college_year)
-        print("min hours: ", user_pref.get_min_hours_work(), " max hours: ", user_pref.get_max_hours_work)
-        print("major courses: ", major_courses)
-        print("courses_taken: ", user_pref.get_courses_taken())
+        print("placeholder_courses: ", placeholder_courses)
 
-        
-        # Process and handle the data received from the frontend
-        print('Received data from frontend:', user_data)
-        print("\n")
-        print("Print Plan Out")
-        print(plan_data)
+        quarters = schedule_maker.create_schedule(major_courses, user_pref.get_courses_taken(), college_year, placeholder_courses)
+        plan_data = py2jsonconvert.convert(quarters)
 
         return jsonify(plan_data), 200
     # except Exception as e:

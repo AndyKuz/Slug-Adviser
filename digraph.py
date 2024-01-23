@@ -61,23 +61,27 @@ class Digraph:
     def choose_quarter(self, num_courses, min_credits, max_credits, min_hours, max_hours, quarter):
         chosen_courses = []
         
-        if len(self.root_courses) == 0:
+        # NOTE: implementation for one random root course per quarter
+        """if len(self.root_courses) == 0:
             return -1
         elif len(self.root_courses) == 1:
             curr_course = 0
         else:
             curr_course = random.randrange(0, len(self.root_courses)-1)
+        """
+
+        if len(self.root_courses) == 0:
+            return -1
+        else:
+            curr_course = 0
         
         # randomly iterates through root courses until it finds one that works for the "quarter"
         while True:
             if quarter in self.root_courses[curr_course].quarters:
                 chosen_courses.append(self.root_courses[curr_course])
-                print("appended course!")
                 break
             else:
                 curr_course = random.randrange(0, len(self.root_courses))
-                print("not appending!")
-
     
         # iterates once or twice depending on num_classes specified
         for c in self.root_courses:
