@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from bson import ObjectId
 
 class Course:
     def __init__(self, dptmnt, dptmnt_num, course_title, num_credits, incoming_prereqs,
@@ -21,23 +21,20 @@ class Course:
         self.priority_rating = (5 - len(self.quarters)) + len(self.outgoing_prereqs)
 
     def to_dict(self):
-        incoming_prereqs_dict = (
-            [prereq.to_dict() for prereq in self.incoming_prereqs]
-            if isinstance(self.incoming_prereqs, list)
-            else []
-        )
-
+        incoming_prereqs_names_list = [(prereq.dptmnt.lower() + "_" + prereq.dptmnt_num.lower()) for prereq in self.incoming_prereqs]
         return {
-            'dptmnt': self.dptmnt,
-            'dptmnt_num': self.dptmnt_num,
+            '_id': self.dptmnt.lower() + "_" + self.dptmnt_num.lower(),
+            'dptmnt': self.dptmnt.lower(),
+            'dptmnt_num': self.dptmnt_num.lower(),
             'course_title': self.course_title,
             'best_prof': self.best_prof,
             'best_prof_rating': self.best_prof_rating,
             'num_credits': self.num_credits,
-            'incoming_prereqs': incoming_prereqs_dict,
+            'incoming_prereqs': incoming_prereqs_names_list,
             'quarters': self.quarters,
             'profs': self.profs
         }
+
 
 class Quarter:
     def __init__(self, college_year, quarter_type, course_list):

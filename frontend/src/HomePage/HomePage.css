@@ -1,0 +1,98 @@
+body {
+    background-color:#3e85f7;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.logo-text {
+    font-size: 65px;
+    text-align: center;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* For horizontally stacked buttons */
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.row-eq-height > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+.translucent > div {border: solid 2px #222; background: rgba(99,99,99,.5);}
+  
+.questions-text {
+    font-size: 30px;
+    padding: 15px;
+}
+
+#question1 {
+    padding-top: 15%;
+    text-align: center;
+}
+
+#question2 {
+    padding-top: 7%;
+    text-align: center;
+}
+
+#question3 {
+    padding-top: 7%;
+    text-align: center;
+}
+
+#generateScheduleButton {
+    padding-top: 7%;
+    text-align: center;
+}
+
+.dflt-textbox {
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+/* For fancy Google Buttons */
+.dflt-button {
+    margin-right: 70px;
+    margin-left: 70px;
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043;
+    cursor: pointer;
+    font-family: arial,sans-serif;
+    font-size: 18px;
+    height: 45px;
+    line-height: 27px;
+    min-width: 170px;
+    padding: 0 16px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: pre;
+}
+
+.dflt-button:hover {
+    border-color: #dadce0;
+    box-shadow: rgba(0, 0, 0, .2) 0 4px 4px;
+    color: #202124;
+}
+
+.dflt-button-focus {
+    border-color: #f7f13e;
+    background-color: #f7f13e;
+    outline: none;
+}
+  

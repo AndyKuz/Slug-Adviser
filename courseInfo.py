@@ -1,7 +1,6 @@
 from course import Course
 from ratemyprofessorwebscrape import rmp_exec
 
-math_3 = Course(dptmnt='MATH', dptmnt_num='3', course_title='Precalculus', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[]) #in development
 math_19a = Course(dptmnt='MATH', dptmnt_num='19A', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[], quarters=[0, 1, 2], profs=[])
 math_19b = Course(dptmnt='MATH', dptmnt_num='19B', course_title='Calculus for Science, Engineering, and Mathematics', num_credits=5, incoming_prereqs=[math_19a], quarters=[0, 1, 2], profs=[])
 math_23a = Course(dptmnt='MATH', dptmnt_num='23A', course_title='Vector Calculus', num_credits=5, incoming_prereqs=[math_19b], quarters=[0, 1, 2], profs=[])
@@ -77,7 +76,6 @@ ee_placeholders = ["Elective 1", "Elective 2", "Elective 3", "Elective 4", "Caps
 
 
 course_dict = {
-    'math_3': math_3,
     'math_19a': math_19a,
     'math_19b': math_19b,
     'am_10': am_10,
@@ -112,19 +110,20 @@ course_dict = {
     'stat_131orcse_107': stat_131orcse_107,
 }
 
-def rmp(l):
-    print("in rmp")
-    for c in l:
-        print("in courses")
-        best_prof = ""
-        min_rating = 10
-        for p in c.profs:
-            print("in profs")
-            print("P: ", p)
-            curr_rating = rmp_exec(p)[0]
-            if curr_rating < min_rating:
-                min_rating = curr_rating
-                best_prof = p
+# TODO: need to get rate my professor working
+# def rmp(l):
+#     print("in rmp")
+#     for c in l:
+#         print("in courses")
+#         best_prof = ""
+#         min_rating = 10
+#         for p in c.profs:
+#             print("in profs")
+#             print("P: ", p)
+#             curr_rating = rmp_exec(p)[0]
+#             if curr_rating < min_rating:
+#                 min_rating = curr_rating
+#                 best_prof = p
 
               
 
@@ -153,5 +152,3 @@ def get_courseInfo():
 # ```
 # TESTING
 # ```
-
-# CE.extend(ce_digital_hardware)
